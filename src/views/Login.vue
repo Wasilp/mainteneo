@@ -119,28 +119,44 @@ export default {
       }
     },
     login() {
+      // console.log('HARD LOGIN WITH TOKEN');
+      // var hardToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTU2NTE5Mjk2MywiZXhwIjoxNTY1MTk2NTYzLCJpc3MiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJBT1VrVXA4UEZOZWxpQ3FnRmZUSVh6N1VudzMyIn0.trUcxC7630d0AOqJLU4Em_pbwUwhvLtWhb-4fD9xhgpAvtyPHwgiYqzT2L7IaNIBVHbvjifbKg3Of4l4mR-zaF86IO03xmVR231d9wvsoYzt6nw-ENAAM-1HCi2zWRCKXPxDd_9lYRAPsuT4ANLOAVj26YFDMomHWwqDGYleznLuKlk4aq64kMMu_wV8XkOFsjV4ThtEY0YnBMhuUh5T-MlpplpgKTA1Rr8DNHt2bt56fn4zi6IsJWAUk3cxBSjHOy3pMB_1Xh2wBt5Mt_E2rQykZ23kK9CtKaP_pEsr5Gqc2xkOdbL9PDYcOUzziDzAidbyva68GeTRvGYpNsYZiQ'
+      // fb.auth.signInWithCustomToken(hardToken)
+      // .then((result) => {
+      //   console.log('SUCCESSS '+JSON.stringify(result));
+      //   var currentUser = fb.auth.currentUser;
+      //   console.log('CURRENT USER')
+      //   console.log(JSON.stringify(currentUser));
+      // })
+      // return;
       // this.performingRequest = true;
       Users.actions.webAuthRequest('32', '159').then((response) => {
         console.log('[web auth request] '+JSON.stringify(response));
         if(response.status === 'success'){
-          const requestId = response.requestId;
-          console.log('[requestId] to listen '+requestId);          
+          const token = response.token;
+          //new auth
+          fb.auth.signInWithCustomToken(token)
+          .then((result) => {
+            console.log('SUCCESSS '+JSON.stringify(result));
+            //TODO
+            // this.$store.commit("SET_CURRENT_USER", userCredential.user);
+            // this.$store.dispatch("fetchUserProfile");
+            // this.$router.push("/dashboard");
+          })
+          .catch((error) => {
+            console.log(error);
+            this.errorMsg = error.message;
+          })
+          var currentUser = fb.auth.currentUser;
+          console.log(JSON.stringify(currentUser));
+        } else if(response.status === 'error'){
+          this.errorMsg = response.message;
         }
       })
       .catch((error) => {
         console.log('[error] '+error)
       })
       return;
-      //new auth
-      fb.auth.signInWithCustomToken(token)
-      .then((result) => {
-        console.log('SUCCESSS')
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      var currentUser = fb.auth.currentUser;
-      console.log(JSON.stringify(currentUser));
       //old
       fb.auth
         .signInWithEmailAndPassword(
