@@ -1,0 +1,424 @@
+{
+  "topToolbar": {
+    "actions": {
+      "about": "About",
+      "contactSupport": "Contact Support",
+      "logout": "Logout"
+    }
+  },
+  "navigationDrawer": {
+    "menuItems": {
+      "dashboard": "Dashboard",
+      "tanksMenu": {
+        "tanks": "Cylinders",
+        "listing": "Listing",
+        "available": "Available",
+        "toReturn": "To Return",
+        "taken": "Taken",
+        "onSite": "On Site"
+      },
+      "interventionsMenu": {
+        "interventions": "Interventions",
+        "listing": "Listing"
+      },
+      "installationsMenu": {
+        "installations": "Installations",
+        "listing": "Listing"
+      },
+      "customersMenu": {
+        "customers": "Customers",
+        "listing": "Listing",
+        "add": "New Customer"
+      },
+      "employeesMenu": {
+        "employees": "Employees",
+        "listing": "Listing"
+      },
+      "gasAccountingMenu": {
+        "gasAccounting": "Gas Accounting",
+        "accountingByTank": "By Cylinder"
+      },
+      "contactSupport": "Contact Support"
+    }
+  },
+  "views": {
+    "dashboard": {
+      "noTanks": "There is no cylinder in your company stock! <br><br> Please add some cylinders with the Mainteneo App.",
+      "tanksInStock": "Cylinders in stock",
+      "inventoryViewGraph": {
+        "title": "Real-time Stock And Storage Capacity",
+        "quantity": "Quantity",
+        "capacity": "Capacity"
+      },
+      "inventoryCircleViewGraph": {
+        "title": "Stock distribution"
+      }
+    },
+    "tanks": {
+      "listing": {
+        "title": "Cylinders listing"
+      },
+      "available": {
+        "title": "Available Cylinders"
+      },
+      "toReturn": {
+        "title": "Cylinder To Return",
+        "tanksReturned": "Cylinders returned.",
+        "errors": {
+          "noTankSelected": "No Cylinder selected. Please select at least one Cylinder to return.",
+          "technicalError": "Technical error. Please contact Mainteneo support."
+        }
+      },
+      "taken": {
+        "title": "Taken Cylinders"
+      },
+      "onSite": {
+        "title": "On Site Cylinders"
+      }
+    },
+    "interventions": {
+      "listing": {
+        "title": "Interventions Listing"
+      }
+    },
+    "installations": {
+      "listing": {
+        "title": "Installations Listing"
+      }
+    },
+    "customers": {
+      "listing": {
+        "title": "Customers Listing"
+      },
+      "add": {
+        "title": "Add Customer",
+        "form": {
+          "title": "Customer Information",
+          "name": "Name",
+          "group": "Group",
+          "phone": "Phone",
+          "email": "Email",
+          "address": "Address",
+          "postalCode": "Postal Code",
+          "city": "City",
+          "country": "Country",
+          "vat": "VAT",
+          "save": "Save",
+          "cancel": "Cancel",
+          "customerSaved": "The new Customer has been saved."
+        },
+        "addGroup": "Create a new Group",
+        "groupName": "Group Name",
+        "groupNameEmpty": "The Group name is mandatoiry",
+        "groupSaved": "The new Group has been saved."
+      },
+      "edit": {
+        "title": "Edit Customer",
+        "form": {
+          "title": "Customer Information",
+          "name": "Name",
+          "phone": "Phone",
+          "email": "Email",
+          "address": "Address",
+          "postalCode": "Postal Code",
+          "city": "City",
+          "country": "Country",
+          "vat": "VAT",
+          "save": "Save",
+          "cancel": "Cancel"
+        }
+      }
+    },
+    "employees": {
+      "listing": {
+        "title": "Employees Listing"
+      }
+    },
+    "gasAccounting": {
+      "gasAccountingByTank": {
+        "title": "Gas Acccounting By Cylinder"
+      }
+    },
+    "contactSupport": {
+      "title": "Contact support",
+      "form": {
+        "title": "Details Of Your Request",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send",
+        "cancel": "Cancel"
+      }
+    },
+    "login": {
+      "login": "Email",
+      "password": "Password",
+      "loginButton": "Log In"
+    },
+    "tank": {
+      "title": "Cylinder Record",
+      "type": "Type",
+      "quantity": "Quantity",
+      "status": "Status",
+      "supplier": "Supplier",
+      "capacity": "Capacity",
+      "gas": "Gas",
+      "owner": "Owned by",
+      "lastUpdate": "Last update",
+      "lastUpdateBy": "By",
+      "interventions": "Interventions",
+      "events": "Events"
+    },
+    "intervention": {
+      "title": "Intervention Record",
+      "interventionNumber": "Intervention Number",
+      "brand": "Brand",
+      "model": "Model",
+      "fitter": "Fitter",
+      "installation": "Installation",
+      "customer": "Customer",
+      "localization": "Localization",
+      "lastVisit": "Last visit",
+      "gas": "Gas",
+      "interventionReports": "Intervention Reports",
+      "upload": "Upload a File"
+    },
+    "installation": {
+      "title": "Installation Record",
+      "currentQr": "QR Code N°",
+      "sn": "Serial Number",
+      "brand": "Brand",
+      "model": "Model",
+      "type": "Type",
+      "refrigerant": "Gas",
+      "customer": "Customer",
+      "lastVisit": "Last visit",
+      "lastVisitBy": "By",
+      "power": "Power",
+      "capacity": "Capacity",
+      "localization": "Localization",
+      "comment": "Comment",
+      "interventions": "Interventions",
+      "internalUnits": "Internal units",
+      "engineTypes": {
+        "clim": "Air conditioning",
+        "refrig": "Refrigeration"
+      },
+      "engineOperations": {
+        "1": "Eau glacée",
+        "2": "Eau tempérée",
+        "3": "Air extérieur"
+      },
+      "externalUnits": {
+        "1": "Split",
+        "2": "Multi-split",
+        "3": "Monobloc",
+        "4": "Ventilo-convecteur",
+        "5": "Chiller"
+      },
+      "tensions": {
+        "1": "230 – 1 – 50",
+        "2": "230 – 3 – 50",
+        "3": "400 – 3+N - 50"
+      },
+      "internalUnitTypes": {
+        "1": "Cassette",
+        "2": "Mural",
+        "3": "Console",
+        "4": "Plafonnier",
+        "5": "Gainable",
+        "6": "Window",
+        "7": "Groupe de pulsion",
+        "8": "Monobloc"
+      }
+    },
+    "customer": {
+      "title": "Customer Record",
+      "name": "Name",
+      "phone": "Phone",
+      "vat": "VAT",
+      "address": "Address",
+      "email": "Email",
+      "lastUpdate": "Last update",
+      "interventions": "Interventions",
+      "installations": "Installations"
+    },
+    "employee": {
+      "title": "Employee Record",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "phone": "Phone",
+      "language": "Language",
+      "interventions": "Interventions",
+      "inventory": "Personal stock",
+      "events": "Events"
+    },
+    "vehicles": {
+      "title": "Vehicles"
+    }
+  },
+  "dropdownMenus": {
+    "contactSupport": {
+      "placeHolder": "Select a subject",
+      "addUsers": "Add Users",
+      "displayProblem": "Display Problem",
+      "saveProblem": "Save Problem",
+      "other": "Other"
+    },
+    "tankType": {
+      "fluid": "Liquid",
+      "transfer": "Transfer",
+      "recovery": "Recovery"
+    },
+    "tankStatus": {
+      "available": "Available",
+      "taken": "Taken",
+      "onSite": "On Site",
+      "releasedToSupplier": "At Supplier",
+      "toSupplier": "To Return"
+    },
+    "interventionType": {
+      "startup": "Initial operation",
+      "maintenance": "Maintenance",
+      "coldMounting": "Refrigeration assembly",
+      "coldRepair": "Refrigeration repair",
+      "electricalRepair": "Electric repair"
+    },
+    "tankEventType": {
+      "add": "Creation",
+      "take": "Take",
+      "use": "Use",
+      "release": "Release",
+      "releaseOnSite": "Release On Site",
+      "toSupplier": "Returned to Supplier",
+      "toUnstock": "To return to Supplier"
+    }
+  },
+  "dataTables": {
+    "tanksTable": {
+      "search": "Search...",
+      "headers": {
+        "sn": "Serial Number",
+        "type": "Type",
+        "capacity": "Capacity",
+        "quantity": "Quantity",
+        "load": "Load",
+        "refrigerant": "Refrigerant",
+        "status": "Status",
+        "owner": "Owned By",
+        "supplier": "Supplier",
+        "lastUpdate": "Last Update"
+      }
+    },
+    "interventionsTable": {
+      "search": "Search...",
+      "headers": {
+        "interventionNumber": "Intervention N°",
+        "type": "Type",
+        "installation": "Installation",
+        "customer": "Customer",
+        "technician": "Technician",
+        "date": "Date"
+      }
+    },
+    "installationsTable": {
+      "search": "Search...",
+      "headers": {
+        "currentQr": "QR Code N°",
+        "sn": "Serial Nbr",
+        "brand": "Brand",
+        "model": "Model",
+        "type": "Type",
+        "power": "Power",
+        "capacity": "Capacity",
+        "customer": "Customer",
+        "location": "Location",
+        "lastUpdate": "Last Update"
+      }
+    },
+    "installationInternalUnitsTable": {
+      "search": "Search...",
+      "headers": {
+        "sn": "Serial Nbr",
+        "brand": "Brand",
+        "model": "Model",
+        "unitType": "Type",
+        "location": "Location"
+      },
+      "engineTypes": {
+        "clim": "Air conditioning",
+        "refrig": "Refrigeration"
+      }
+    },
+    "customersTable": {
+      "search": "Search...",
+      "headers": {
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "city": "City",
+        "country": "Country",
+        "lastUpdate": "Last Update"
+      }
+    },
+    "employeesTable": {
+      "search": "Search...",
+      "headers": {
+        "name": "Name",
+        "phone": "Phone",
+        "email": "Email",
+        "language": "Language",
+        "timezone": "Timezone",
+        "role": "Role"
+      }
+    },
+    "customerInstallationsEventTable": {
+      "search": "Search...",
+      "headers": {
+        "tank": "Cylinder",
+        "interventionNumber": "Intervention N°",
+        "gas": "Gas",
+        "quantity": "Quantity",
+        "date": "Date",
+        "gasTransfert": "Gaz IN/OUT",
+        "technician": "Technician",
+        "comment": "Comment",
+        "injected": "injected",
+        "recovered": "recovered"
+      }
+    },
+    "tanksEventTable": {
+      "search": "Search...",
+      "headers": {
+        "tank": "Cylinder",
+        "gas": "Gas",
+        "quantity": "Quantity",
+        "action": "Action",
+        "date": "Date",
+        "gasTransfert": "Gaz IN/OUT",
+        "installation": "Installation",
+        "location": "Localization",
+        "technician": "Technician",
+        "comment": "Comment",
+        "injected": "injected",
+        "recovered": "recovered"
+      }
+    }
+  },
+  "global": {
+    "error": "Error",
+    "save": "Save",
+    "saved": "Saved",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No",
+    "mandatoryField": "Mandatory field",
+    "emailField": "Incorrect Email format",
+    "decimalField": "Numeric field with two decimals",
+    "valueNotNegative": "Value must be positive",
+    "errorFieldsValidation": "Please correct invalid fields indicated in red."
+  }
+}

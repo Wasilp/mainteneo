@@ -1,0 +1,414 @@
+{
+  "topToolbar": {
+    "actions": {
+      "about": "Over",
+      "contactSupport": "Contact ondersteuning",
+      "logout": "Uitloggen"
+    }
+  },
+  "navigationDrawer": {
+    "menuItems": {
+      "dashboard": "Dashboard",
+      "tanksMenu": {
+        "tanks": "Flessen",
+        "Lijst": "Lijst",
+        "available": "Beschikbaar",
+        "toReturn": "Om voorraden te maken",
+        "taken": "Bij de technicus",
+        "onSite": "Bij de klant"
+      },
+      "interventionsMenu": {
+        "interventions": "Interventies",
+        "Lijst": "Lijst"
+      },
+      "installationsMenu": {
+        "installations": "Installatie",
+        "Lijst": "Lijst"
+      },
+      "customersMenu": {
+        "customers": "Klanten",
+        "Lijst": "Lijst",
+        "add": "Toevoegen"
+      },
+      "employeesMenu": {
+        "employees": "Werknemers",
+        "Lijst": "Lijst"
+      },
+      "gasAccountingMenu": {
+        "gasAccounting": "Gasboekhouding",
+        "accountingByTank": "Per fles"
+      },
+      "contactSupport": "Contact Ondersteuning"
+    }
+  },
+  "views": {
+    "dashboard": {
+      "noTanks": "There is no cylinder in your company stock! <br><br> Please add some cylinders with the Mainteneo App.",
+      "tanksInStock": "Flessen op voorraad",
+      "inventoryViewGraph": {
+        "title": "Real-time voorraad- en opslagcapaciteit",
+        "quantity": "Hoeveelheid",
+        "capacity": "Hoedanigheid"
+      },
+      "inventoryCircleViewGraph": {
+        "title": "Voorraadverdeling"
+      }
+    },
+    "tanks": {
+      "Lijst": {
+        "title": "Een lijst met Flessen"
+      },
+      "available": {
+        "title": "Flessen beschikbaar"
+      },
+      "toReturn": {
+        "title": "Flessen om te destocken"
+      },
+      "taken": {
+        "title": "Flessen bij technici"
+      },
+      "onSite": {
+        "title": "Bonbonnes bij de klant"
+      }
+    },
+    "interventions": {
+      "Lijst": {
+        "title": "Interventieslijst"
+      }
+    },
+    "installations": {
+      "Lijst": {
+        "title": "Installatieslijst"
+      }
+    },
+    "customers": {
+      "Lijst": {
+        "title": "Klantenlijst"
+      },
+      "add": {
+        "title": "Voeg een klant toe",
+        "form": {
+          "title": "Klant informatie",
+          "name": "Naam",
+          "group": "Groupe-NL",
+          "phone": "telefoon",
+          "email": "E-mail",
+          "address": "Adres",
+          "postalCode": "Postcode",
+          "city": "Stad",
+          "country": "Land",
+          "vat": "BTW",
+          "save": "Opnemen",
+          "cancel": "Annuleren",
+          "customerSaved": "NL Le nouveau client a bien été enregistré."
+        },
+        "addGroup": "NL Create a new Group",
+        "groupName": "NL Group Name",
+        "groupNameEmpty": "NL The Group name is mandatoiry",
+        "groupSaved": "NL The new Group has been saved."
+      },
+      "edit": {
+        "title": "Bewerk een klant",
+        "form": {
+          "title": "Klant informatie",
+          "name": "Naam",
+          "phone": "telefoon",
+          "email": "E-mail",
+          "address": "Adres",
+          "postalCode": "Postcode",
+          "city": "Stad",
+          "country": "Land",
+          "vat": "BTW",
+          "save": "Opnemen",
+          "cancel": "Annuleren"
+        }
+      }
+    },
+    "employees": {
+      "Lijst": {
+        "title": "Werknemerslijst"
+      }
+    },
+    "gasAccounting": {
+      "gasAccountingByTank": {
+        "title": "Gasaccounting per fles"
+      }
+    },
+    "contactSupport": {
+      "title": "Contact ondersteuning",
+      "form": {
+        "title": "Details van uw verzoek",
+        "subject": "Voorwerp",
+        "message": "Bericht",
+        "send": "Sturen",
+        "cancel": "Annuleren"
+      }
+    },
+    "login": {
+      "login": "E-mail",
+      "password": "Wachtwoord",
+      "loginButton": "Inloggen"
+    },
+    "tank": {
+      "title": "Flessenkaart",
+      "type": "Type",
+      "quantity": "Hoeveelheid",
+      "status": "Staat",
+      "supplier": "Leverancier",
+      "capacity": "Hoedangheid",
+      "gas": "Gas",
+      "owner": "In bezit van",
+      "lastUpdate": "Laatste update",
+      "lastUpdateBy": "Door",
+      "interventions": "Interventies",
+      "events": "Evenementen"
+    },
+    "intervention": {
+      "title": "Interventie",
+      "interventionNumber": "Intervention Nee.",
+      "brand": "Mark",
+      "model": "Model",
+      "fitter": "Monteur",
+      "installation": "Installatie",
+      "customer": "Klant",
+      "localization": "Plaats",
+      "lastVisit": "Laatste",
+      "gas": "Gas",
+      "interventionReports": "Interventie rapporten",
+      "upload": "Voeg een bestand toe"
+    },
+    "installation": {
+      "title": "Installatieblad",
+      "currentQr": "QR Code",
+      "sn": "Serienummer",
+      "brand": "Mark",
+      "model": "Model",
+      "type": "Type",
+      "refrigerant": "Gas",
+      "customer": "Klant",
+      "lastVisit": "Laatste bezoek",
+      "lastVisitBy": "Door",
+      "power": "Kracht",
+      "capacity": "Hoedanigheid",
+      "localization": "Plaats",
+      "comment": "Opmerkingen",
+      "interventions": "Interventies",
+      "internalUnits": "NL-Internal units-NL",
+      "engineTypes": {
+        "clim": "Climatisation",
+        "refrig": "Réfrigération"
+      },
+      "engineOperations": {
+        "1": "Eau glacée",
+        "2": "Eau tempérée",
+        "3": "Air extérieur"
+      },
+      "externalUnits": {
+        "1": "Split",
+        "2": "Multi-split",
+        "3": "Monobloc",
+        "4": "Ventilo-convecteur",
+        "5": "Chiller"
+      },
+      "tensions": {
+        "1": "230 – 1 – 50",
+        "2": "230 – 3 – 50",
+        "3": "400 – 3+N - 50"
+      },
+      "internalUnitTypes": {
+        "1": "Cassette",
+        "2": "Mural",
+        "3": "Console",
+        "4": "Plafonnier",
+        "5": "Gainable",
+        "6": "Window",
+        "7": "Groupe de pulsion",
+        "8": "Monobloc"
+      }
+    },
+    "customer": {
+      "title": "Klant kaart",
+      "name": "Naam",
+      "phone": "Telefoon",
+      "vat": "BTW",
+      "address": "Adres",
+      "email": "E-mail",
+      "lastUpdate": "Laatste update",
+      "interventions": "Interventies",
+      "installations": "Installaties"
+    },
+    "employee": {
+      "title": "Werknemer Kaart",
+      "name": "Naam",
+      "email": "E-mail",
+      "role": "Rol",
+      "phone": "Telefoon",
+      "language": "Taal",
+      "interventions": "Interventies",
+      "inventory": "Persoonlijke voorraad",
+      "events": "Evenemente"
+    },
+    "vehicles": {
+      "title": "**NL** Vehicles"
+    }
+  },
+  "dropdownMenus": {
+    "contactSupport": {
+      "placeHolder": "Selecteer een onderwerp",
+      "addUsers": "Gebruikers toevoegen",
+      "displayProblem": "Weergave probleem",
+      "saveProblem": "Back-up probleem",
+      "other": "Anders"
+    },
+    "tankType": {
+      "fluid": "Vloeistof",
+      "transfer": "Overdracht",
+      "recovery": "Herstel"
+    },
+    "tankStatus": {
+      "available": "Beschikbaar",
+      "taken": "Het nemen",
+      "onSite": "Bij de klant",
+      "releasedToSupplier": "Bij de leverancier",
+      "toSupplier": "Om terug te zetten"
+    },
+    "interventionType": {
+      "startup": "Commissioning",
+      "maintenance": "Onderhoud",
+      "coldMounting": "Koude montage",
+      "coldRepair": "Problemen met koeling oplossen",
+      "electricalRepair": "Elektrische problemen oplossen"
+    },
+    "tankEventType": {
+      "add": "Cchepping",
+      "take": "Het nemen",
+      "use": "Gebruik",
+      "release": "Korting",
+      "releaseOnSite": "Levering bij de klant",
+      "toSupplier": "Opruiming",
+      "toUnstock": "To return to Supplier (NL)"
+    }
+  },
+  "dataTables": {
+    "tanksTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "sn": "Serienummer",
+        "type": "Type",
+        "capacity": "Hoedanigheid",
+        "quantity": "Hoeveelheid",
+        "load": "Belasting",
+        "refrigerant": "Koelmiddel",
+        "status": "Staat",
+        "owner": "In bezit van",
+        "supplier": "Levancier",
+        "lastUpdate": "Laatste Update"
+      }
+    },
+    "interventionsTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "interventionNumber": "Interventie Nee.",
+        "type": "Type",
+        "installation": "Installatie",
+        "customer": "Klant",
+        "technician": "Technicus",
+        "date": "Datum"
+      }
+    },
+    "installationsTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "currentQr": "QR Code",
+        "sn": "Serienummer",
+        "brand": "Mark",
+        "model": "Model",
+        "type": "Type",
+        "power": "Kracht",
+        "capacity": "Hoedanigheid",
+        "customer": "klant",
+        "lastUpdate": "Laatste Update"
+      }
+    },
+    "installationInternalUnitsTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "sn": "Serienummer",
+        "brand": "Mark",
+        "model": "Model",
+        "unitType": "Type",
+        "location": "NL-Location"
+      }
+    },
+    "customersTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "name": "Naam",
+        "email": "E-mail",
+        "address": "Adres",
+        "postalCode": "Postcode",
+        "city": "Stad",
+        "country": "Land",
+        "lastUpdate": "Laatste Update"
+      }
+    },
+    "employeesTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "name": "Naam",
+        "phone": "Telefoon",
+        "email": "E-mail",
+        "language": "Taal",
+        "timezone": "Timezone",
+        "role": "Rol"
+      }
+    },
+    "customerInstallationsEventTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "tank": "Fles",
+        "interventionNumber": "Interventie Nee.",
+        "gas": "Gas",
+        "quantity": "Hoeveelheid",
+        "date": "Datum",
+        "gasTransfert": "IN/UIT Gas",
+        "technician": "Technicus",
+        "comment": "Opmerkingen",
+        "injected": "Geïnjecteerd",
+        "recovered": "Hersteld"
+      }
+    },
+    "tanksEventTable": {
+      "search": "Doe een zoekopdracht...",
+      "headers": {
+        "tank": "Fles",
+        "gas": "Gas",
+        "quantity": "Hoeveelheid",
+        "action": "Actie",
+        "date": "Datum",
+        "gasTransfert": "IN/UIT Gas",
+        "installation": "Installatie",
+        "location": "Plaats",
+        "technician": "Technicus",
+        "comment": "Opmerkingen",
+        "injected": "Geïnjecteerd",
+        "recovered": "Hersteld"
+      }
+    }
+  },
+  "global": {
+    "error": "Fout",
+    "save": "Enregistrer NL",
+    "saved": "Enregistré NL",
+    "cancel": "Annuleren",
+    "confirm": "Bevestingen",
+    "ok": "OK",
+    "yes": "Ja",
+    "no": "Nee",
+    "mandatoryField": "Dit veld is verplich",
+    "emailField": "Ongeldige e-mailindeling",
+    "decimalField": "Numeriek veld met twee decimalen",
+    "valueNotNegative": "Waarde moet positief zijn",
+    "errorFieldsValidation": "Corrigeer de rode gemarkeerde velden."
+  }
+}

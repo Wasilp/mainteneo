@@ -1,0 +1,425 @@
+{
+  "topToolbar": {
+    "actions": {
+      "about": "A propos",
+      "contactSupport": "Contacter le support",
+      "logout": "Déconnection"
+    }
+  },
+  "navigationDrawer": {
+    "menuItems": {
+      "dashboard": "Dashboard",
+      "tanksMenu": {
+        "tanks": "Bonbonnes",
+        "listing": "Listing",
+        "available": "Disponibles",
+        "toReturn": "A déstocker",
+        "taken": "Chez le technicien",
+        "onSite": "Chez le client"
+      },
+      "interventionsMenu": {
+        "interventions": "Interventions",
+        "listing": "Listing"
+      },
+      "installationsMenu": {
+        "installations": "Installations",
+        "listing": "Listing"
+      },
+      "customersMenu": {
+        "customers": "Clients",
+        "listing": "Listing",
+        "add": "Ajouter"
+      },
+      "employeesMenu": {
+        "employees": "Employés",
+        "listing": "Listing"
+      },
+      "vehiclesMenu": {
+        "vehicles": "Véhicules",
+        "listing": "Listing"
+      },
+      "gasAccountingMenu": {
+        "gasAccounting": "Comptabilité des gaz",
+        "accountingByTank": "Par bonbonne"
+      },
+      "contactSupport": "Contact support"
+    }
+  },
+  "views": {
+    "dashboard": {
+      "noTanks": "Il n'y a aucune bonbonne dans le stock de la société!<br><br>Veuillez ajouter des bonbonnes au stock via l'app Mainteneo.",
+      "tanksInStock": "Bonbonnes en stock",
+      "inventoryViewGraph": {
+        "title": "Stock en temps réel et capacité de stockage",
+        "quantity": "quantité",
+        "capacity": "capacité"
+      },
+      "inventoryCircleViewGraph": {
+        "title": "Répartition du stock"
+      }
+    },
+    "tanks": {
+      "listing": {
+        "title": "Listing Bonbonnes"
+      },
+      "available": {
+        "title": "Bonbonnes disponibles"
+      },
+      "toReturn": {
+        "title": "Bonbonnes à déstocker",
+        "tanksReturned": "Bonbonnes déstockées.",
+        "errors": {
+          "noTankSelected": "Aucune bonbonne sélectionnée. Veuillez sélectionner au moins une bonbonne à déstocker.",
+          "technicalError": "Erreur Technique: veuillez contacter le support de Mainteneo."
+        }
+      },
+      "taken": {
+        "title": "Bonbonnes chez les techniciens"
+      },
+      "onSite": {
+        "title": "Bonbonnes chez le client"
+      }
+    },
+    "interventions": {
+      "listing": {
+        "title": "Listing interventions"
+      }
+    },
+    "installations": {
+      "listing": {
+        "title": "Listing installations"
+      }
+    },
+    "customers": {
+      "listing": {
+        "title": "Listing clients"
+      },
+      "add": {
+        "title": "Ajouter un client",
+        "form": {
+          "title": "Informations client",
+          "group": "Groupe",
+          "name": "Nom",
+          "phone": "Téléphone",
+          "email": "Email",
+          "address": "Adresse",
+          "postalCode": "Code postal",
+          "city": "Ville",
+          "country": "Pays",
+          "vat": "TVA",
+          "save": "Enregistrer",
+          "cancel": "Annuler",
+          "customerSaved": "Le nouveau client a bien été enregistré."
+        },
+        "addGroup": "Créer un nouveau Groupe",
+        "groupName": "Nom du Groupe",
+        "groupNameEmpty": "Le nom du groupe est obligatoire",
+        "groupSaved": "Le nouveau groupe a bien été enregistré."
+      },
+      "edit": {
+        "title": "Modifier un client",
+        "form": {
+          "title": "Informations client",
+          "name": "Nom",
+          "phone": "Téléphone",
+          "email": "Email",
+          "address": "Adresse",
+          "postalCode": "Code postal",
+          "city": "Ville",
+          "country": "Pays",
+          "vat": "TVA",
+          "save": "Enregistrer",
+          "cancel": "Annuler"
+        }
+      }
+    },
+    "employees": {
+      "listing": {
+        "title": "Listing employés"
+      }
+    },
+    "gasAccounting": {
+      "gasAccountingByTank": {
+        "title": "Comptabilité des gaz par bonbonne"
+      }
+    },
+    "contactSupport": {
+      "title": "Contact support",
+      "form": {
+        "title": "Détails de votre demande",
+        "subject": "Objet",
+        "message": "Message",
+        "send": "Envoyer",
+        "cancel": "Annuler"
+      }
+    },
+    "login": {
+      "login": "Email",
+      "password": "Mot de passe",
+      "loginButton": "Se connecter"
+    },
+    "tank": {
+      "title": "Fiche bonbonne",
+      "type": "Type",
+      "quantity": "Quantité",
+      "status": "Statut",
+      "supplier": "Fournisseur",
+      "capacity": "Capacité",
+      "gas": "Gaz",
+      "owner": "En possession de",
+      "lastUpdate": "Dernière mise à jour",
+      "lastUpdateBy": "Par",
+      "interventions": "Interventions",
+      "events": "Evènements"
+    },
+    "intervention": {
+      "title": "Intervention",
+      "interventionNumber": "N° d'intervention",
+      "brand": "Marque",
+      "model": "Modèle",
+      "fitter": "Installateur",
+      "installation": "Installation",
+      "customer": "Client",
+      "localization": "Localisation",
+      "lastVisit": "Dernière visite",
+      "gas": "Gaz",
+      "interventionReports": "Rapports d'intervention",
+      "upload": "Charger un fichier"
+    },
+    "installation": {
+      "title": "Fiche d'installation",
+      "currentQr": "N° QR Code",
+      "sn": "N° de série",
+      "brand": "Marque",
+      "model": "Modèle",
+      "type": "Type",
+      "refrigerant": "Gaz",
+      "customer": "Client",
+      "lastVisit": "Dernière visite",
+      "lastVisitBy": "Par",
+      "power": "Puissance",
+      "capacity": "Capacité",
+      "localization": "Localisation",
+      "comment": "Commentaire",
+      "interventions": "Interventions",
+      "internalUnits": "Unités intérieures",
+      "engineTypes": {
+        "clim": "Climatisation",
+        "refrig": "Réfrigération"
+      },
+      "engineOperations": {
+        "1": "Eau glacée",
+        "2": "Eau tempérée",
+        "3": "Air extérieur"
+      },
+      "externalUnits": {
+        "1": "Split",
+        "2": "Multi-split",
+        "3": "Monobloc",
+        "4": "Ventilo-convecteur",
+        "5": "Chiller"
+      },
+      "tensions": {
+        "1": "230 – 1 – 50",
+        "2": "230 – 3 – 50",
+        "3": "400 – 3+N - 50"
+      },
+      "internalUnitTypes": {
+        "1": "Cassette",
+        "2": "Mural",
+        "3": "Console",
+        "4": "Plafonnier",
+        "5": "Gainable",
+        "6": "Window",
+        "7": "Groupe de pulsion",
+        "8": "Monobloc"
+      }
+    },
+    "customer": {
+      "title": "Fiche client",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "vat": "TVA",
+      "address": "Adresse",
+      "email": "Email",
+      "lastUpdate": "Dernière mise à jour",
+      "interventions": "Interventions",
+      "installations": "Installations"
+    },
+    "employee": {
+      "title": "Fiche employé",
+      "name": "Nom",
+      "email": "Email",
+      "role": "Rôle",
+      "phone": "Téléphone",
+      "language": "Langue",
+      "interventions": "Interventions",
+      "inventory": "Stock personnel",
+      "events": "Evènements"
+    },
+    "vehicles": {
+      "title": "Véhicules"
+    }
+  },
+  "dropdownMenus": {
+    "contactSupport": {
+      "placeHolder": "Sélectionner un objet",
+      "addUsers": "Ajout d'utilisateurs",
+      "displayProblem": "Problème d'affichage",
+      "saveProblem": "Problème de sauvegarde",
+      "other": "Autre"
+    },
+    "tankType": {
+      "fluid": "Fluide",
+      "transfer": "Transfert",
+      "recovery": "Récupération"
+    },
+    "tankStatus": {
+      "available": "Disponible",
+      "taken": "Prise",
+      "onSite": "Chez le client",
+      "releasedToSupplier": "Chez le fournisseur",
+      "toSupplier": "A remettre"
+    },
+    "interventionType": {
+      "startup": "Mise en route",
+      "maintenance": "Maintenance",
+      "coldMounting": "Montage frigorifique",
+      "coldRepair": "Dépannage frigorifique",
+      "electricalRepair": "Dépannage électrique"
+    },
+    "tankEventType": {
+      "add": "Création",
+      "take": "Prise",
+      "use": "Utilisation",
+      "release": "Remise",
+      "releaseOnSite": "Remise chez le client",
+      "toSupplier": "Déstockage",
+      "toUnstock": "A déstocker"
+    }
+  },
+  "dataTables": {
+    "tanksTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "sn": "N° de série",
+        "type": "Type",
+        "capacity": "Capacité",
+        "quantity": "Quantité",
+        "load": "Charge",
+        "refrigerant": "Réfrigérant",
+        "status": "Statut",
+        "owner": "En possession de",
+        "supplier": "Fournisseur",
+        "lastUpdate": "Dernière mise à jour"
+      }
+    },
+    "interventionsTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "interventionNumber": "N° d'intervention",
+        "type": "Type",
+        "installation": "Installation",
+        "customer": "Client",
+        "technician": "Technicien",
+        "date": "Date"
+      }
+    },
+    "installationsTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "currentQr": "N° QR Code",
+        "sn": "N° de série",
+        "brand": "Marque",
+        "model": "Modèle",
+        "type": "Type",
+        "power": "Puissance",
+        "capacity": "Capacité",
+        "customer": "Client",
+        "location": "Localisation",
+        "lastUpdate": "Dernière mise à jour"
+      }
+    },
+    "installationInternalUnitsTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "sn": "N° de série",
+        "brand": "Marque",
+        "model": "Modèle",
+        "unitType": "Type",
+        "location": "Localisation"
+      }
+    },
+    "customersTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "name": "Nom",
+        "email": "Email",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "country": "Pays",
+        "lastUpdate": "Dernière mise à jour"
+      }
+    },
+    "employeesTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "name": "Nom",
+        "phone": "Téléphone",
+        "email": "Email",
+        "language": "Langue",
+        "timezone": "Timezone",
+        "role": "Rôle"
+      }
+    },
+    "customerInstallationsEventTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "tank": "Bonbonne",
+        "interventionNumber": "N° d'intervention",
+        "gas": "Gaz",
+        "quantity": "Quantité",
+        "date": "Date",
+        "gasTransfert": "Gaz IN/OUT",
+        "technician": "Technicien",
+        "comment": "Commentaire",
+        "injected": "injectés",
+        "recovered": "récupérés"
+      }
+    },
+    "tanksEventTable": {
+      "search": "Rechercher...",
+      "headers": {
+        "tank": "Bonbonne",
+        "gas": "Gaz",
+        "quantity": "Quantité",
+        "action": "Action",
+        "date": "Date",
+        "gasTransfert": "Gaz IN/OUT",
+        "installation": "Installation",
+        "location": "Localisation",
+        "technician": "Technicien",
+        "comment": "Commentaire",
+        "injected": "injectés",
+        "recovered": "récupérés"
+      }
+    }
+  },
+  "global": {
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "ok": "OK",
+    "yes": "Oui",
+    "no": "Non",
+    "mandatoryField": "Ce champ est obligatoire",
+    "emailField": "Format d'email incorrect",
+    "decimalField": "Champ numérique à deux décimales",
+    "valueNotNegative": "La valeur doit être positive",
+    "errorFieldsValidation": "Veuillez corriger les champs indiqués en rouge."
+  }
+}
