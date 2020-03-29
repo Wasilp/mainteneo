@@ -119,8 +119,9 @@ export default {
       }
     },
     login() {
+      // console.log('login called')
       // console.log('HARD LOGIN WITH TOKEN');
-      // var hardToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTU2NTE5Mjk2MywiZXhwIjoxNTY1MTk2NTYzLCJpc3MiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJBT1VrVXA4UEZOZWxpQ3FnRmZUSVh6N1VudzMyIn0.trUcxC7630d0AOqJLU4Em_pbwUwhvLtWhb-4fD9xhgpAvtyPHwgiYqzT2L7IaNIBVHbvjifbKg3Of4l4mR-zaF86IO03xmVR231d9wvsoYzt6nw-ENAAM-1HCi2zWRCKXPxDd_9lYRAPsuT4ANLOAVj26YFDMomHWwqDGYleznLuKlk4aq64kMMu_wV8XkOFsjV4ThtEY0YnBMhuUh5T-MlpplpgKTA1Rr8DNHt2bt56fn4zi6IsJWAUk3cxBSjHOy3pMB_1Xh2wBt5Mt_E2rQykZ23kK9CtKaP_pEsr5Gqc2xkOdbL9PDYcOUzziDzAidbyva68GeTRvGYpNsYZiQ'
+      // var hardToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTU3MTMwNzA0MCwiZXhwIjoxNTcxMzEwNjQwLCJpc3MiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ2UjFUWFplZDlKVlp3WHlDNUFrYjFyejB0WXAyIn0.QnqggKj5UOCuxWsOGUtNLQSpt7fjyRbmu-TXyuoeGkmc02K7qH71Ep5rA62giMWvXZik3TuQ0dVdnzZ4a2mLGFBmnqTo22pB4bn4drfE9v3yw-k9jm1EeFv_nAQR5wt182XQFWP-Be28ttmFD_MBUiNyRq6sNDBaykJLmpwEUqW_YgpasW5K_VW3isXSN_gd4UjPSM0ZgwCeFad8-qL1czCZjQnum5gNZ0FWbzfrVEIhfEETNGDQaGdJPT3YjHsb3PH0VIgHQn-AuOYzYH0btHRTFt--u1O2dFfkrlefYdbW9QL9Z5Mx2wxMcB88gxAuRlS_IUEj2DYqta6wLmgQ-Q'
       // fb.auth.signInWithCustomToken(hardToken)
       // .then((result) => {
       //   console.log('SUCCESSS '+JSON.stringify(result));
@@ -130,11 +131,14 @@ export default {
       // })
       // return;
       // this.performingRequest = true;
-      Users.actions.webAuthRequest('32', '159').then((response) => {
+      Users.actions.webAuthRequest('32', '1001').then((response) => {
         console.log('[web auth request] '+JSON.stringify(response));
         if(response.status === 'success'){
           const token = response.token;
           //new auth
+          console.log(response);
+          console.log('-------')
+          console.log(response.token)
           fb.auth.signInWithCustomToken(token)
           .then((result) => {
             console.log('SUCCESSS '+JSON.stringify(result));

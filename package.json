@@ -1,5 +1,5 @@
 {
-	"name": "mainteneo-backoffice",
+	"name": "mainteneo-cockpit-expo",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -7,10 +7,12 @@
 		"build": "vue-cli-service build"
 	},
 	"dependencies": {
-		"echarts": "^4.2.1",
-		"firebase": "^5.9.4",
-		"firebase-functions": "^3.2.0",
+		"browserify-fs": "^1.0.0",
+		"echarts": "^4.3.0",
+		"firebase": ">=6.0.2-0",
 		"font-awesome": "^4.7.0",
+		"fs": "0.0.1-security",
+		"grpc": "^1.20.2",
 		"moment": "^2.24.0",
 		"postcss-import": "^12.0.1",
 		"postcss-url": "^8.0.0",
