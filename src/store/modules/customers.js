@@ -10,19 +10,20 @@ export const actions = {
    * Create a new customer
    */
   createCustomer({ rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
-
+    console.log(payload)
     const recordMetadata = {
       lastUpdate: fb.fv.serverTimestamp(),
-      lastUpdateByName: rootState.userProfile.userName,
+      lastUpdateByUserUserName: rootState.userProfile.userName,
       lastUpdateById: rootState.userProfile.userId,
-      compName: rootState.userProfile.compName,
+      compName: rootState.userProfile.refrigCompanyName,
       compId: compId
     };
 
     const newCustomer = Object.assign(recordMetadata, payload);
+    console.log(newCustomer)
 
     return refrigCompCustomersCollecRef.add(newCustomer);
   },
@@ -30,7 +31,7 @@ export const actions = {
    * Edit existing customer
    */
   updateCustomer({ rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const customersDocRef = refrigCompRef
       .collection('customers')
@@ -41,7 +42,7 @@ export const actions = {
       lastUpdateByName: rootState.userProfile.userName,
       lastUpdateById: rootState.userProfile.userId,
       compName: rootState.userProfile.compName,
-      compId: rootState.userProfile.compId
+      compId: compId
     };
 
     const updatedCustomer = Object.assign(
@@ -56,7 +57,7 @@ export const actions = {
    * Get a customer by ID
    */
   fetchCustomer({ rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const customersDocRef = refrigCompRef
       .collection('customers')
@@ -69,11 +70,13 @@ export const actions = {
    */
   fetchCustomers({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
+    console.log(compId)
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
     //Base Query
     let query = refrigCompCustomersCollecRef.where('compId', '==', compId);
+    console.log(query)
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {
@@ -86,7 +89,7 @@ export const actions = {
     return query.get();
   },
   fetchGroups({ rootState }) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompGroupDocRef = refrigCompRef
       .collection('customerGroups')
@@ -95,7 +98,7 @@ export const actions = {
     return refrigCompGroupDocRef.get();
   },
   updateGroups({ rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompGroupDocRef = refrigCompRef
       .collection('customerGroups')

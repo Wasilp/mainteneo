@@ -13,7 +13,7 @@
       <v-progress-linear :value="value" height="5" :color="color"></v-progress-linear>
       <span class="caption">{{caption}}</span>
     </v-card-text>
-  </v-card>   
+  </v-card>
 </template>
 
 <script>

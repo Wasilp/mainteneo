@@ -9,8 +9,9 @@ import * as interventions from '@/store/modules/interventions.js';
 
 const fb = require('../firebaseConfig');
 
-Vue.use(Vuex);
 
+Vue.use(Vuex);
+console.log(fb)
 // handle page reload
 fb.auth.onAuthStateChanged(user => {
   if (user) {
@@ -18,7 +19,7 @@ fb.auth.onAuthStateChanged(user => {
     store.commit('SET_CURRENT_USER', user);
     store.dispatch('fetchUserProfile');
   }
-  else 
+  else
     console.log('[Store.js] Auth changed user null')
 });
 
@@ -78,7 +79,7 @@ export const store = new Vuex.Store({
       }
     },
     fetchVehicles({ rootState }) {
-      const compId = rootState.userProfile.compId;
+      const compId = rootState.userProfile.refrigCompanyId;
       const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
       const refrigCompVehicleDocRef = refrigCompRef
         .collection('vehicles')
@@ -87,7 +88,7 @@ export const store = new Vuex.Store({
       return refrigCompVehicleDocRef.get();
     },
     updateVehicles({ rootState }, payload) {
-      const compId = rootState.userProfile.compId;
+      const compId = rootState.userProfile.refrigCompanyId;
       const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
       const refrigCompVehicleDocRef = refrigCompRef
         .collection('vehicles')

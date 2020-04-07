@@ -11,9 +11,10 @@ export const actions = {
    */
   fetchTank({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    // console.log(payload.tankId)
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
-    const tanksDocRef = refrigCompRef.collection('tanks').doc(payload.tankId);
+    const tanksDocRef = refrigCompRef.collection('tanksLive').doc(payload.tankId);
 
     return new Promise((resolve, reject) => {
       tanksDocRef
@@ -38,14 +39,14 @@ export const actions = {
    * Get all tanks
    */
   fetchMyTanks({ commit, rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const userId = rootState.userProfile.userId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
-    const refrigCompTanksCollecRef = refrigCompRef.collection('tanks');
+    const refrigCompTanksCollecRef = refrigCompRef.collection('tanksLive');
     // const tanksDocRef = refrigCompRef.collection('tanks').doc(tankId);
 
     //Base Query
-    let query = refrigCompTanksCollecRef.where('compId', '==', compId);
+    let query = refrigCompTanksCollecRef.where('refrigCompanyId', '==', compId);
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {
@@ -77,12 +78,12 @@ export const actions = {
    * Get tank events
    */
   fetchTankEvents({ commit, rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
-    const tankHistoryCollecRef = refrigCompRef.collection('tankHistory');
+    const tankHistoryCollecRef = refrigCompRef.collection('tanksHistory');
 
     //Base Query
-    let query = tankHistoryCollecRef.where('compId', '==', compId);
+    let query = tankHistoryCollecRef.where('refrigCompanyId', '==', compId);
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {
@@ -102,6 +103,7 @@ export const actions = {
             tankEvent.id = doc.id;
             tankEventsArray.push(tankEvent);
           });
+          console.log(tankEventsArray)
           resolve(tankEventsArray);
         })
         .catch(error => {
@@ -115,10 +117,10 @@ export const actions = {
 
     const refrigCompRef = fb.db
       .collection('refrigCompanies')
-      .doc(rootState.userProfile.compId);
-    const refrigCompTanksCollecRef = refrigCompRef.collection('tanks');
+      .doc(rootState.userProfile.refrigCompanyId);
+    const refrigCompTanksCollecRef = refrigCompRef.collection('tanksLive');
     const refrigCompTankHistoryCollecRef = refrigCompRef.collection(
-      'tankHistory'
+      'tanksHistory'
     );
 
     if (!Array.isArray(payload)) {

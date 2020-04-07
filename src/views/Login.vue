@@ -29,6 +29,18 @@
             ></v-text-field>
           </v-form>
 
+          <v-form class="mb-4">
+            <v-text-field
+              v-model.trim="loginForm.password"
+              prepend-icon="password"
+              name="login"
+              :label="this.$i18n.t('views.login.password')"
+              placeholder="Password"
+              type="text"
+              color="#5071b6"
+            ></v-text-field>
+          </v-form>
+
           <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
           <v-btn @click="logout" round large dark color="black">Logout</v-btn>
           <div class="extras">
@@ -131,42 +143,48 @@ export default {
       // })
       // return;
       // this.performingRequest = true;
-      Users.actions.webAuthRequest('32', '1001').then((response) => {
-        console.log('[web auth request] '+JSON.stringify(response));
-        if(response.status === 'success'){
-          const token = response.token;
-          //new auth
-          console.log(response);
-          console.log('-------')
-          console.log(response.token)
-          fb.auth.signInWithCustomToken(token)
-          .then((result) => {
-            console.log('SUCCESSS '+JSON.stringify(result));
-            //TODO
-            // this.$store.commit("SET_CURRENT_USER", userCredential.user);
-            // this.$store.dispatch("fetchUserProfile");
-            // this.$router.push("/dashboard");
-          })
-          .catch((error) => {
-            console.log(error);
-            this.errorMsg = error.message;
-          })
-          var currentUser = fb.auth.currentUser;
-          console.log(JSON.stringify(currentUser));
-        } else if(response.status === 'error'){
-          this.errorMsg = response.message;
-        }
-      })
-      .catch((error) => {
-        console.log('[error] '+error)
-      })
-      return;
-      //old
+
       fb.auth
-        .signInWithEmailAndPassword(
-          this.loginForm.email,
-          this.loginForm.password
-        )
+      .signInWithEmailAndPassword(
+        this.loginForm.email,
+        this.loginForm.password
+      )
+      // Users.actions.webAuthRequest('32', '41001').then((response) => {
+      //   console.log('[web auth request] '+JSON.stringify(response));
+      //   if(response.status === 'success'){
+      //     const token = response.token;
+      //     //new auth
+      //     console.log(response);
+      //     console.log('-------')
+      //     console.log(response.token)
+      //     fb.auth.signInWithCustomToken(token)
+      //     .then((result) => {
+      //       console.log('SUCCESSS '+JSON.stringify(result));
+      //       //TODO
+      //       // this.$store.commit("SET_CURRENT_USER", userCredential.user);
+      //       // this.$store.dispatch("fetchUserProfile");
+      //       // this.$router.push("/dashboard");
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //       this.errorMsg = error.message;
+      //     })
+      //     var currentUser = fb.auth.currentUser;
+      //     console.log(JSON.stringify(currentUser));
+      //   } else if(response.status === 'error'){
+      //     this.errorMsg = response.message;
+      //   }
+      // })
+      // .catch((error) => {
+      //   console.log('[error] '+error)
+      // })
+      // return;
+      // //old
+      // fb.auth
+      //   .signInWithEmailAndPassword(
+      //     this.loginForm.email,
+      //     this.loginForm.password
+      //   )
         .then(userCredential => {
           this.$store.commit("SET_CURRENT_USER", userCredential.user);
           this.$store.dispatch("fetchUserProfile");

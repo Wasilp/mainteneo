@@ -39,17 +39,17 @@
               >{{ $t('dropdownMenus.tankType.recovery') }}</span>
             </td>
             <td class>{{ props.item.capacity }} kg</td>
-            <td class>{{ props.item.quantity }} kg</td>
+            <td class>{{ props.item.load}} kg</td>
             <td class style="padding:10px">
               <v-progress-circular
                 :size="76"
                 :width="10"
                 :rotate="-90"
-                :value="props.item.quantity/props.item.capacity * 100"
+                :value="props.item.load/props.item.capacity * 100"
                 color="accent"
-              >{{ Math.round((props.item.quantity / props.item.capacity) * 100) }} %</v-progress-circular>
+              >{{ Math.round((props.item.load / props.item.capacity) * 100) }} %</v-progress-circular>
             </td>
-            <td class>{{ props.item.refrigerant }}</td>
+            <td class>{{ props.item.gas }}</td>
             <td class>
               <v-chip
                 v-if="props.item.status == 1"
@@ -79,7 +79,7 @@
             </td>
             <td class>
               <a
-                v-if="props.item.taken"
+                v-if="props.item.takenByName"
                 @click="navigateTo('/employee/' + props.item.takenById)"
               >{{ props.item.takenByName}}</a>
               <a
@@ -88,8 +88,8 @@
               >{{ props.item.custNameReleased }}</a>
             </td>
             <td v-if="showVehiclesUI" class>{{ props.item.inVehicle }}</td>
-            <td class>{{ props.item.providerCompName }}</td>
-            <td class>{{ props.item.lastUpdate.toDate() | formatDate }}</td>
+            <td class>{{ props.item.gasProviderCompanyName}}</td>
+            <td class>{{ props.item.lastUpdated.toDate() | formatDate }}</td>
           </tr>
         </template>
       </v-data-table>
@@ -131,6 +131,8 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else {
+
+          console.log(response,'kikou')
         this.tanksItems = response;
       }
     }

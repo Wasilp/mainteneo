@@ -23,7 +23,8 @@
       },
       "installationsMenu": {
         "installations": "Installations",
-        "listing": "Listing"
+        "listing": "Listing",
+        "add": "New installation"
       },
       "customersMenu": {
         "customers": "Customers",

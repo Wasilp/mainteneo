@@ -27,16 +27,16 @@
       >
         <template slot="items" slot-scope="props">
           <tr
-            @click.stop="navigateTo('/intervention/' + props.item.values[0].installId + '/' + props.item.values[0].interventionNbr)"
+            @click.stop="navigateTo('/intervention/' + props.item.values[0].installationId + '/' + props.item.values[0].interventionNumber)"
             :style="{ cursor: 'pointer'}"
           >
-            <td class>{{ props.item.interventionNbr }}</td>
+            <td class>{{ props.item.values[0].interventionNumber }}</td>
             <td class>
               <span
                 v-if="props.item.values[0].interventionType==1"
               >{{ $t('dropdownMenus.interventionType.startup') }}</span>
               <span
-                v-else-if="props.item.values[0].interventionType==2"
+                v-else-if="props.item.values[0].interventionType=='maintenanceColdInstallation'"
               >{{ $t('dropdownMenus.interventionType.maintenance') }}</span>
               <span
                 v-else-if="props.item.values[0].interventionType==3"
@@ -50,8 +50,8 @@
             </td>
             <td class>
               <a
-                @click.stop="navigateTo('/installation/' + props.item.values[0].installId)"
-              >{{ props.item.values[0].currentQr }}</a>
+                @click.stop="navigateTo('/installation/' + props.item.values[0].installationId)"
+              >{{ props.item.values[0].installationSN }}</a>
             </td>
             <td class>
               <a
@@ -93,6 +93,8 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else {
+
+      console.log(response)
         this.interventionItems = response;
       }
     }

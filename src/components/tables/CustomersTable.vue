@@ -75,6 +75,7 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else {
+        console.log(response)
         this.customersItems = response;
       }
     }

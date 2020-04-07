@@ -28,9 +28,8 @@ export const actions = {
    */
   fetchUser({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
-    const userRef = fb.db.collection(USERS_COLLECTON).doc(payload.userId);
-
+    const compId = rootState.userProfile.refrigCompanyId;
+    const userRef = fb.db.collection(USERS_COLLECTON).doc(firebase.auth().currentUser.uid);
     return new Promise((resolve, reject) => {
       userRef
         .get()
@@ -87,48 +86,61 @@ export const actions = {
         });
     });
   },
-   
+
   /**
    * Web auth request
    */
   webAuthRequest(countryCode, phoneNumber) {
     var webAuthRequestFunction = fb.functions.httpsCallable('webAuthRequest');
+    // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
+
     const requestUniqueKey = UTIL.getUniqueID();
     const data = {
       requestUniqueKey : requestUniqueKey,
       countryCode : countryCode,
-      phoneNumber : phoneNumber
+      phoneNumber : phoneNumber,
+      // verificationCode  : '123456'
     }
     return new Promise((resolve, reject) => {
+      // authWithCodeRequestFunction(data)
       webAuthRequestFunction(data)
+
+
       .then(function(result) {
         //listen for change
         // Read result of the Cloud Function.
+
         const requestId = result.data.requestId;
+
         var unsubscribe = fb.db.collection(PENDINGWEBAUTHREQUESTS_COLLECTION).doc(requestId)
+
           .onSnapshot((doc) => {
+
             let pendingWebAuthRequest = doc.data();
-            if(pendingWebAuthRequest)
+
+
               if(pendingWebAuthRequest.authorized === true){
                 if(pendingWebAuthRequest.token){
-                  resolve({status:'success', message: 'Successfully authenticate', token: pendingWebAuthRequest.token})
+                  resolve({status:'success', message: 'Successfully authenticate', token: token})
                   unsubscribe();
                 }else{
-                  resolve({status:'error', message: 'Something failed please try again'})  
+                  resolve({status:'error', message: 'Something failed please try again'})
                   unsubscribe();
                   return;
                 }
-              }else if(pendingWebAuthRequest.authorized === false){                            
+              }else if(pendingWebAuthRequest.authorized === false){
                 resolve({status:'error', message: 'You are not authorized to login with this number'})
                 unsubscribe();
                 return;
               }
           }, (error) => {
+            consol.log('plop')
             reject(error);
             unsubscribe();
           });
       }).catch(function(error) {
         // Getting the Error details.
+         consol.log('plopcatch')
         reject(error);
         unsubscribe();
       });

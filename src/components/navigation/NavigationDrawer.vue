@@ -129,7 +129,14 @@ export default {
                 "navigationDrawer.menuItems.installationsMenu.listing"
               ),
               link: "/installations"
-            }
+          },
+          {
+            icon: "add",
+            text: this.$i18n.t(
+              "navigationDrawer.menuItems.installationsMenu.add"
+            ),
+            link: "/add-installation"
+          }
           ]
         },
         {
@@ -266,5 +273,3 @@ export default {
 </script>
 <style>
 </style>
-
-

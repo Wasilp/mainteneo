@@ -12,17 +12,11 @@ export const actions = {
    */
   fetchCustomerInstallationHistory({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
-    const refrigCompCustomerInstallationHistoryCollecRef = refrigCompRef.collection(
-      'customerInstallationHistory'
-    );
+    const refrigCompCustomerInstallationHistoryCollecRef = refrigCompRef.collection('interventions');
     //Base Query
-    let query = refrigCompCustomerInstallationHistoryCollecRef.where(
-      'compId',
-      '==',
-      compId
-    );
+    let query = refrigCompCustomerInstallationHistoryCollecRef.where('createdByrefrigCompanyId','==',compId);
     let groupByKey = null;
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
@@ -45,6 +39,7 @@ export const actions = {
           querySnapshot.forEach(doc => {
             let customerInstallationHistory = doc.data();
             customerInstallationHistory.id = doc.id;
+            console.log(doc.id)
             customerInstallationHistoryArray.push(customerInstallationHistory);
           });
           if (groupByKey) {

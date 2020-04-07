@@ -11,7 +11,7 @@ export const actions = {
    * Create a new installation
    */
   createInstallation({ commit, rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomerInstallationCollecRef = refrigCompRef.collection(
       'customerInstallations'
@@ -48,7 +48,7 @@ export const actions = {
    * Edit existing installation
    */
   updateInstallation({ commit, rootState }, payload) {
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const customersDocRef = refrigCompRef
       .collection('customers')
@@ -87,7 +87,7 @@ export const actions = {
    */
   fetchInstallation({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const installationDocRef = refrigCompRef
       .collection('customerInstallations')
@@ -117,7 +117,7 @@ export const actions = {
    */
   fetchInstallations({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomerInstallationsCollecRef = refrigCompRef.collection(
       'customerInstallations'

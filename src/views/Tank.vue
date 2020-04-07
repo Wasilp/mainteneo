@@ -24,9 +24,9 @@
                     :size="80"
                     :width="10"
                     :rotate="-90"
-                    :value="tank.quantity/tank.capacity*100"
+                    :value="tank.load/tank.capacity*100"
                     color="accent"
-                  >{{ Math.round((tank.quantity/tank.capacity) *100) }} %</v-progress-circular>
+                  >{{ Math.round((tank.load/tank.capacity) *100) }} %</v-progress-circular>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -44,11 +44,11 @@
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.quantity') }}:</label>
-                  {{ tank.quantity }}
+                  {{ tank.load }}
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.gas') }}:</label>
-                  {{ tank.refrigerant }}
+                  {{ tank.gas }}
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.status') }}:</label>
@@ -87,17 +87,17 @@
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.supplier') }}:</label>
-                  {{tank.providerCompName}}
+                  {{tank.gasProviderCompanyName}}
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.lastUpdate') }}:</label>
-                  {{tank.lastUpdate.toDate() | formatDate}}
+                  {{tank.lastUpdated.toDate() | formatDate}}
                 </v-flex>
                 <v-flex sm6></v-flex>
                 <v-flex sm6></v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.lastUpdateBy') }}:</label>
-                  <a @click="navigateTo('/employee/'+tank.lastUpdateById)">{{tank.lastUpdateByName}}</a>
+                  <a @click="navigateTo('/employee/'+tank.lastUpdatedByUserId)">{{tank.lastUpdatedByUserName}}</a>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -131,10 +131,10 @@
             <!-- <v-tab-item id="tab-3" key="3">
               <employees-table></employees-table>
             </v-tab-item>-->
-            <!-- Statistic TAB 
+            <!-- Statistic TAB
             <v-tab-item id="tab-4" key="4">
               <v-layout row wrap>
-                 mini statistic start 
+                 mini statistic start
                 <v-flex lg3 sm6 xs12></v-flex>
                 <v-flex lg3 sm6 xs12>
                   <v-card class="block-element">
@@ -197,7 +197,7 @@
                     ></mini-statistic>
                   </v-card>
                 </v-flex>
-                mini statistic  end 
+                mini statistic  end
               </v-layout>
             </v-tab-item>
             END statistic Tab-->
