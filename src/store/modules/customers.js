@@ -13,7 +13,7 @@ export const actions = {
     const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
-    console.log(payload)
+    
     const recordMetadata = {
       lastUpdate: fb.fv.serverTimestamp(),
       lastUpdateByUserUserName: rootState.userProfile.userName,
@@ -23,7 +23,6 @@ export const actions = {
     };
 
     const newCustomer = Object.assign(recordMetadata, payload);
-    console.log(newCustomer)
 
     return refrigCompCustomersCollecRef.add(newCustomer);
   },
@@ -71,12 +70,10 @@ export const actions = {
   fetchCustomers({ commit, rootState }, payload) {
     //RW Permissions
     const compId = rootState.userProfile.refrigCompanyId;
-    console.log(compId)
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
     //Base Query
     let query = refrigCompCustomersCollecRef.where('compId', '==', compId);
-    console.log(query)
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {
@@ -105,5 +102,15 @@ export const actions = {
       .doc('groups');
 
     return refrigCompGroupDocRef.set({ groupNames: payload }, { merge: true });
+  },
+
+  isEmailExist({rootState}, payload){
+      const compId = rootState.userProfile.refrigCompanyId;
+      const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
+      const customersDocRef = refrigCompRef.collection('customers')
+      .where('email', '==', payload.email)
+
+      console.log(customersDocRef.get())
+      return customersDocRef.get();
   }
 };

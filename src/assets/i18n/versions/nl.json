@@ -409,6 +409,7 @@
     "emailField": "Ongeldige e-mailindeling",
     "decimalField": "Numeriek veld met twee decimalen",
     "valueNotNegative": "Waarde moet positief zijn",
-    "errorFieldsValidation": "Corrigeer de rode gemarkeerde velden."
+    "errorFieldsValidation": "Corrigeer de rode gemarkeerde velden.",
+    "errorMailInUse": "Deze e-mail is al in gebruik."
   }
 }

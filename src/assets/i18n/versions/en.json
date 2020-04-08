@@ -420,6 +420,7 @@
     "emailField": "Incorrect Email format",
     "decimalField": "Numeric field with two decimals",
     "valueNotNegative": "Value must be positive",
-    "errorFieldsValidation": "Please correct invalid fields indicated in red."
+    "errorFieldsValidation": "Please correct invalid fields indicated in red.",
+    "errorMailInUse": "This mail is already taken."
   }
 }

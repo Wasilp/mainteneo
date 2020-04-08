@@ -420,6 +420,7 @@
     "emailField": "Format d'email incorrect",
     "decimalField": "Champ numérique à deux décimales",
     "valueNotNegative": "La valeur doit être positive",
-    "errorFieldsValidation": "Veuillez corriger les champs indiqués en rouge."
+    "errorFieldsValidation": "Veuillez corriger les champs indiqués en rouge.",
+    "errorMailInUse": "L'adresse mail existe déjà."
   }
 }

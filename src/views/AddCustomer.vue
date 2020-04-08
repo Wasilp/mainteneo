@@ -498,7 +498,12 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
-      if (this.$v.$invalid) {
+
+      let mailExist
+      this.$store.dispatch("isEmailExist", this.customer).then(docRef => {
+          mailExist = docRef.docs.length
+
+      if (this.$v.$invalid ) {
         this.$snotify.error(
           this.$t("global.errorFieldsValidation"),
           this.$t("global.error"),
@@ -509,7 +514,23 @@ export default {
             pauseOnHover: true
           }
         );
-      } else {
+      }
+
+      else if(mailExist >= 1){
+          this.$snotify.error(
+            this.$t("global.errorMailInUse"),
+            this.$t("global.error"),
+            {
+              timeout: 3000,
+              showProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true
+            }
+        )
+      }
+
+
+      else {
         this.customer.phoneNbrs = [this.customer.phoneNbrs];
         const payload = this.customer;
         if (!this.showCustomerGroupsUI) {
@@ -529,6 +550,8 @@ export default {
           this.$router.push("/customer/" + docRef.id);
         });
       }
+
+      });
     },
     addGroup() {
       if (this.newGroup !== null && this.newGroup !== "") {

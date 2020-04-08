@@ -34,9 +34,9 @@
               v-model.trim="loginForm.password"
               prepend-icon="password"
               name="login"
+              type="password"
               :label="this.$i18n.t('views.login.password')"
               placeholder="Password"
-              type="text"
               color="#5071b6"
             ></v-text-field>
           </v-form>
