@@ -106,7 +106,8 @@
           "vat": "VAT",
           "save": "Save",
           "cancel": "Cancel",
-          "customerSaved": "The new Customer has been saved."
+          "customerSaved": "The new Customer has been saved.",
+          "customerDeleted": "The customer has been deleted."
         },
         "addGroup": "Create a new Group",
         "groupName": "Group Name",

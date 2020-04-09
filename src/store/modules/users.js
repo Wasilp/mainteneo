@@ -55,10 +55,10 @@ export const actions = {
    */
   fetchUsers({ commit, rootState }, payload) {
     //RW Permissions
-    const compId = rootState.userProfile.compId;
+    const compId = rootState.userProfile.refrigCompanyId;
     const usersRef = fb.db.collection(USERS_COLLECTON);
     //Base Query
-    let query = usersRef.where('compId', '==', compId);
+    let query = usersRef.where('refrigCompanyId', '==', compId);
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {

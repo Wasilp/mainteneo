@@ -13,7 +13,7 @@ export const actions = {
     const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
-    
+
     const recordMetadata = {
       lastUpdate: fb.fv.serverTimestamp(),
       lastUpdateByUserUserName: rootState.userProfile.userName,
@@ -112,5 +112,12 @@ export const actions = {
 
       console.log(customersDocRef.get())
       return customersDocRef.get();
+  },
+
+  deleteCustomerByid({rootState},id){
+      const compId = rootState.userProfile.refrigCompanyId;
+      const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
+      const customerDocRef = refrigCompRef.collection('customers')
+      customerDocRef.doc(id).delete()
   }
 };
