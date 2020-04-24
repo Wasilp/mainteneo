@@ -135,7 +135,7 @@ export default {
             text: this.$i18n.t(
               "navigationDrawer.menuItems.installationsMenu.add"
             ),
-            link: "/add-installation"
+            link: "/addInstallation"
           }
           ]
         },

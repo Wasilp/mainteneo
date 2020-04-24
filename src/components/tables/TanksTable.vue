@@ -13,6 +13,9 @@
       <v-btn icon>
         <v-icon>filter_list</v-icon>
       </v-btn>
+      <v-btn icon @click="exportChild">
+        <download-link ref="childRef" :dataParent="this.tanksItems" :parentName="this.$options.name"></download-link>
+      </v-btn>
     </v-toolbar>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
@@ -30,12 +33,12 @@
           <tr @click.stop="navigateTo('/tank/' + props.item.id)" :style="{ cursor: 'pointer'}">
             <td class nowrap>{{ props.item.sN }}</td>
             <td class>
-              <span v-if="props.item.currentType==1">{{ $t('dropdownMenus.tankType.fluid') }}</span>
+              <span v-if="props.item.type==1">{{ $t('dropdownMenus.tankType.fluid') }}</span>
               <span
-                v-else-if="props.item.currentType==2"
+                v-else-if="props.item.type==2"
               >{{ $t('dropdownMenus.tankType.transfer') }}</span>
               <span
-                v-else-if="props.item.currentType==3"
+                v-else-if="props.item.type==3"
               >{{ $t('dropdownMenus.tankType.recovery') }}</span>
             </td>
             <td class>{{ props.item.capacity }} kg</td>
@@ -98,11 +101,12 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import downloadLink from "../DownloadLink.vue"
 const fb = require("../../firebaseConfig.js");
 export default {
   name: "tanks-table",
   props: ["query"],
-  components: {},
+  components: {downloadLink},
   data() {
     return {
       search: "",
@@ -116,6 +120,10 @@ export default {
     };
   },
   methods: {
+
+    exportChild() {
+      this.$refs.childRef.onExport();
+    },
     navigateTo(target) {
       this.$router.push(target);
     },
@@ -132,7 +140,7 @@ export default {
         console.log("Error: " + error);
       } else {
 
-          console.log(response,'kikou')
+      console.log(response,'liste tanks')
         this.tanksItems = response;
       }
     }
@@ -188,6 +196,8 @@ export default {
     }
   },
   created: function() {
+
+
     this.$store.state.currentUser
       .getIdTokenResult()
       .then(idTokenResult => {

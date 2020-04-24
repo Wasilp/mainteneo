@@ -30,20 +30,19 @@
             @click.stop="navigateTo('/installation/' + props.item.id)"
             :style="{ cursor: 'pointer'}"
           >
-            <td class>{{ props.item.currentQr }}</td>
             <td class>{{ props.item.sN }}</td>
-            <td class>{{ props.item.brand }}</td>
+            <td class>{{ props.item.engineProviderCompanyName }}</td>
             <td class>{{ props.item.model }}</td>
             <td class>{{ props.item.type}}</td>
             <td class>{{ props.item.power }}</td>
-            <td class>{{ props.item.capacity }}</td>
+            <td class>{{ props.item.load }}</td>
             <td class>
               <a
-                @click.stop="navigateTo('/customer/' + props.item.customerCompanyId)"
-              >{{ props.item.customerCompanyName }}</a>
+                @click.stop="navigateTo('/customer/' + props.item.customerId)"
+              >{{ props.item.customerName }}</a>
             </td>
-            <td class>{{ props.item.location }}</td>
-            <td class>{{ props.item.lastUpdate.toDate() | formatDate }}</td>
+            <td class>{{ props.item.localization }}</td>
+            <td class>{{ props.item.lastUpdated.toDate() | formatDate }}</td>
           </tr>
         </template>
       </v-data-table>
@@ -77,10 +76,7 @@ export default {
     ...mapState(["userProfile", "installations"]),
     headers: function() {
       return [
-        {
-          text: this.$i18n.t("dataTables.installationsTable.headers.currentQr"),
-          value: "currentQr"
-        },
+
         {
           text: this.$i18n.t("dataTables.installationsTable.headers.sn"),
           value: "sN"
@@ -137,7 +133,10 @@ export default {
           installation.id = doc.id;
           installationsArray.push(installation);
         });
+
         this.installationsItems = installationsArray;
+
+        console.log(this.installationsItems)
       })
       .catch(error => {
         console.log("Error getting documents: ", error);

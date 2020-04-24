@@ -202,8 +202,8 @@
       "interventions": "Interventions",
       "internalUnits": "Internal units",
       "engineTypes": {
-        "clim": "Air conditioning",
-        "refrig": "Refrigeration"
+        "1": "Air conditioning",
+        "2": "Refrigeration"
       },
       "engineOperations": {
         "1": "Eau glacée",
@@ -281,10 +281,12 @@
     },
     "interventionType": {
       "startup": "Initial operation",
-      "maintenance": "Maintenance",
-      "coldMounting": "Refrigeration assembly",
-      "coldRepair": "Refrigeration repair",
-      "electricalRepair": "Electric repair"
+      "maintenanceColdInstallation": "Maintenance cold installation",
+      "maintenanceHeatPumpAirConditionning": "Maintenance heat pump air conditionning",
+      "leakingControl": "Leaking control",
+      "repair": "repair",
+      "recoveryRecyclingDestruction": "Recovery recycling destruction",
+      "pressureControl": "Pressure control"
     },
     "tankEventType": {
       "add": "Creation",

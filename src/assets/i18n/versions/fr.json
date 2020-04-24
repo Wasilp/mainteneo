@@ -204,8 +204,8 @@
       "interventions": "Interventions",
       "internalUnits": "Unités intérieures",
       "engineTypes": {
-        "clim": "Climatisation",
-        "refrig": "Réfrigération"
+        "1": "Climatisation",
+        "2": "Réfrigération"
       },
       "engineOperations": {
         "1": "Eau glacée",
@@ -270,9 +270,9 @@
       "other": "Autre"
     },
     "tankType": {
-      "fluid": "Fluide",
-      "transfer": "Transfert",
-      "recovery": "Récupération"
+      "1": "Fluide",
+      "2": "Transfert",
+      "3": "Récupération"
     },
     "tankStatus": {
       "available": "Disponible",
@@ -283,10 +283,12 @@
     },
     "interventionType": {
       "startup": "Mise en route",
-      "maintenance": "Maintenance",
-      "coldMounting": "Montage frigorifique",
-      "coldRepair": "Dépannage frigorifique",
-      "electricalRepair": "Dépannage électrique"
+      "maintenanceColdInstallation": "Maintenance cold installation",
+      "maintenanceHeatPumpAirConditionning": "Maintenance heat pump air conditionning",
+      "leakingControl": "Leaking control",
+      "repair": "Dépannage",
+      "recoveryRecyclingDestruction": "Recovery recycling destruction",
+      "pressureControl": "Pressure control"
     },
     "tankEventType": {
       "add": "Création",

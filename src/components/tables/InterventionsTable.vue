@@ -27,43 +27,52 @@
       >
         <template slot="items" slot-scope="props">
           <tr
-            @click.stop="navigateTo('/intervention/' + props.item.values[0].installationId + '/' + props.item.values[0].interventionNumber)"
+            @click.stop="navigateTo('/intervention/' + props.item.installationId + '/' + props.item.interventionNumber)"
             :style="{ cursor: 'pointer'}"
           >
-            <td class>{{ props.item.values[0].interventionNumber }}</td>
+            <td class>{{ props.item.interventionNumber }}</td>
             <td class>
               <span
-                v-if="props.item.values[0].interventionType==1"
+                v-if="props.item.interventionType=='startup'"
               >{{ $t('dropdownMenus.interventionType.startup') }}</span>
               <span
-                v-else-if="props.item.values[0].interventionType=='maintenanceColdInstallation'"
-              >{{ $t('dropdownMenus.interventionType.maintenance') }}</span>
+                v-else-if="props.item.interventionType=='maintenanceColdInstallation'"
+              >{{ $t('dropdownMenus.interventionType.maintenanceColdInstallation') }}</span>
               <span
-                v-else-if="props.item.values[0].interventionType==3"
+                v-else-if="props.item.interventionType=='maintenanceHeatPumpAirConditionning'"
+              >{{ $t('dropdownMenus.interventionType.maintenanceHeatPumpAirConditionning') }}</span>
+              <span
+                v-else-if="props.item.interventionType=='coldMounting'"
               >{{ $t('dropdownMenus.interventionType.coldMounting') }}</span>
               <span
-                v-else-if="props.item.values[0].interventionType==4"
-              >{{ $t('dropdownMenus.interventionType.coldRepair') }}</span>
+                v-else-if="props.item.interventionType=='repair'"
+              >{{ $t('dropdownMenus.interventionType.repair') }}</span>
               <span
-                v-else-if="props.item.values[0].interventionType==5"
-              >{{ $t('dropdownMenus.interventionType.electricalRepair') }}</span>
+                v-else-if="props.item.interventionType=='pressureControl'"
+              >{{ $t('dropdownMenus.interventionType.pressureControl') }}</span>
+              <span
+                v-else-if="props.item.interventionType=='leakingControl'"
+              >{{ $t('dropdownMenus.interventionType.leakingControl') }}</span>
+              <span
+                v-else-if="props.item.interventionType=='recoveryRecyclingDestruction'"
+              >{{ $t('dropdownMenus.interventionType.recoveryRecyclingDestruction') }}</span>
             </td>
             <td class>
               <a
-                @click.stop="navigateTo('/installation/' + props.item.values[0].installationId)"
-              >{{ props.item.values[0].installationSN }}</a>
+                @click.stop="navigateTo('/installation/' + props.item.installationId)"
+              >{{ props.item.installationSN }}</a>
             </td>
             <td class>
               <a
-                @click.stop="navigateTo('/customer/' + props.item.values[0].customerCompanyId)"
-              >{{ props.item.values[0].customerCompanyName }}</a>
+                @click.stop="navigateTo('/customer/' + props.item.customerId)"
+              >{{ props.item.customerName }}</a>
             </td>
             <td class>
               <a
-                @click.stop="navigateTo('/employee/' + props.item.values[0].actionById)"
-              >{{ props.item.values[0].actionByName }}</a>
+                @click.stop="navigateTo('/employee/' + props.item[0].actionByUserId)"
+              >{{ props.item.actionByUserName }}</a>
             </td>
-            <td class>{{ props.item.values[0].actionDate.toDate() | formatDate }}</td>
+            <td class>{{ props.item.actionDate.toDate() | formatDate }}</td>
           </tr>
         </template>
       </v-data-table>
@@ -81,7 +90,7 @@ export default {
     return {
       search: "",
       pagination: {},
-      interventionItems: []
+      interventionItems:[]
     };
   },
   methods: {
@@ -94,8 +103,9 @@ export default {
         console.log("Error: " + error);
       } else {
 
-      console.log(response)
         this.interventionItems = response;
+
+
       }
     }
   },

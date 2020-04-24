@@ -26,23 +26,23 @@
                 <v-layout row wrap>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.interventionNumber') }}:</label>
-                    {{ interventionItems[0].interventionNbr }}
+                    {{ interventionItems[0].interventionNumber }}
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.installation') }}:&nbsp;</label>
                     <a
                       @click="navigateTo('/installation/'+installation.id)"
-                    >{{installation.currentQr}}</a>
+                    >{{installation.sN}}</a>
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.brand') }}:</label>
-                    {{installation.brand}}
+                    {{installation.engineProviderCompanyName}}
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.customer') }}:&nbsp;</label>
                     <a
-                      @click="navigateTo('/customer/'+installation.customerCompanyId)"
-                    >{{ installation.customerCompanyName}}</a>
+                      @click="navigateTo('/customer/'+installation.customerId)"
+                    >{{ installation.customerName}}</a>
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.model') }}:</label>
@@ -50,17 +50,17 @@
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.localization') }}:</label>
-                    {{ installation.location}}
+                    {{ installation.localization}}
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.fitter') }}:&nbsp;</label>
                     <a
-                      @click="navigateTo('/employee/'+installation.lastUpdateById)"
-                    >{{ installation.lastUpdateByName}}</a>
+                      @click="navigateTo('/employee/'+installation.lastUpdatedByUserId)"
+                    >{{ installation.lastUpdatedByUserUserName}}</a>
                   </v-flex>
                   <v-flex sm6>
                     <label>{{ $t('views.intervention.lastVisit') }}:</label>
-                    {{ installation.lastUpdate.toDate() | formatDate }}
+                    {{ installation.lastUpdated.toDate() | formatDate }}
                   </v-flex>
                 </v-layout>
               </v-flex>
@@ -79,7 +79,7 @@
             </v-tab>
             <v-tab-item id="tab-1" key="1">
               <customer-installation-events-table
-                :query="[['interventionNbr','==', this.$route.params.interventionNbr]]"
+                :query="[['interventionId','==', interventionItems[0].id]]"
               ></customer-installation-events-table>
             </v-tab-item>
             <v-tab-item id="tab-2" key="2">
@@ -104,7 +104,7 @@
                   <div class="layout row media-layout">
                     <div class="media-content flex transparent">
                       <vue-perfect-scrollbar class="media-content--warp">
-                        <v-container fluid v-if="view ==='grid'">
+                        <v-container fluid >
                           <v-layout row wrap class="x-grid-lg">
                             <v-flex
                               lg4
@@ -112,8 +112,7 @@
                               xs12
                               class="pa-2"
                               v-for="(item, id) in interventionFiles"
-                              :key="id"
-                            >
+                              :key="id">
                               <a @click="openFile(item.downloadURL, id)" class="d-flex">
                                 <v-card flat tile class="media-detail">
                                   <v-card-media height="150px" width="150px" style="margin:auto;">
@@ -200,6 +199,8 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else if (response) {
+
+      console.log(response,'installation datac')
         this.installation = response;
       } else {
         navigateTo("404");
@@ -210,7 +211,9 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else if (response) {
+          console.log(response,'intervention datac')
         this.interventionItems = response;
+        console.log(this.interventionItems[0].id)
         switch (this.interventionItems[0].interventionType) {
           case "1":
             this.interventionType = this.$i18n.t(
@@ -258,21 +261,18 @@ export default {
       }
     },
     setInterventionFilesListener() {
-      const compId = this.$store.state.userProfile.compId;
+
+      const interventionId = this.$route.params.interventionNumber;
+      const compId = this.$store.state.userProfile.refrigCompanyId;
       const refrigCompRef = fb.db.collection("refrigCompanies").doc(compId);
+      const refrigCompInterventionFilesCollection = refrigCompRef.collection("interventionsFile")
 
-      const refrigCompInterventionFilesCollection = refrigCompRef.collection(
-        "interventionFiles"
-      );
-
-      const interventionNbr = this.$route.params.interventionNbr;
-
-      refrigCompInterventionFilesCollection
-        .where("compId", "==", compId)
-        .where("interventionId", "==", interventionNbr)
-        .orderBy("uploadDate", "desc")
-        .onSnapshot(
-          querySnapshot => {
+     refrigCompInterventionFilesCollection
+        // NEED TO FIX FirebaseError: The query requires an index.
+        // .where("compId", "==", compId)
+        // .where("interventionId", "==", interventionId)
+        // .orderBy("uploadDate", "desc")
+        .onSnapshot(function(querySnapshot){
             var filesArray = [];
             querySnapshot.forEach(doc => {
               let file = doc.data();
@@ -280,6 +280,8 @@ export default {
               filesArray.push(file);
             });
             this.interventionFiles = filesArray;
+
+            console.log(this.interventionFiles)
           },
           error => {
             //TODO: treat error
@@ -295,7 +297,7 @@ export default {
       const file = evt.target.files[0];
       const fileUploadPayload = {
         file: file,
-        interventionId: self.interventionItems[0].interventionNbr
+        interventionId: self.interventionItems[0].interventionNumber
       };
       this.loading = true;
       this.$store.dispatch("uploadFile", fileUploadPayload).then(() => {
@@ -309,13 +311,14 @@ export default {
   created: function() {
     const installationPayload = {};
     const interventionPayload = {};
+
     if (
       this.$route.params.installationId &&
-      this.$route.params.interventionNbr
+      this.$route.params.interventionNumber
     ) {
       installationPayload.installationId = this.$route.params.installationId;
       interventionPayload.query = [
-        ["interventionNbr", "==", this.$route.params.interventionNbr]
+        ["interventionNumber", "==", this.$route.params.interventionNumber]
       ];
     } else {
       navigateTo("404");

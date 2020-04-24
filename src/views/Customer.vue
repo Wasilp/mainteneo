@@ -68,12 +68,12 @@
 
             <v-tab-item id="tab-1" key="1">
               <interventions-table
-                :query="[['groupBy','interventionNbr'],['customerCompanyId' , '==', this.$route.params.id]]"
+                :query="[['groupBy','interventionNumber'],['customerId' , '==', this.$route.params.id]]"
               ></interventions-table>
             </v-tab-item>
 
             <v-tab-item id="tab-2" key="2">
-              <installations-table :query="[['customerCompanyId', '==', this.$route.params.id]]"></installations-table>
+              <installations-table :query="[['customerId', '==', this.$route.params.id]]"></installations-table>
             </v-tab-item>
           </v-tabs>
         </v-flex>

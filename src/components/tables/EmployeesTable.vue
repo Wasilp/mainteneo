@@ -28,9 +28,9 @@
           <tr @click.stop="navigateTo('/employee/' + props.item.id)" :style="{ cursor: 'pointer'}">
             <td class>{{ props.item.userName }}</td>
             <td class>{{ phoneNumber(props.item) }}</td>
-            <td class>{{ props.item.email}}</td>
+            <td class>{{ props.item.emailId}}</td>
             <td class>{{ props.item.lng }}</td>
-            <td class>{{ props.item.userType }}</td>
+            <td class>{{ props.item.role }}</td>
           </tr>
         </template>
       </v-data-table>
@@ -65,8 +65,8 @@ export default {
       }
     },
     phoneNumber: function(employee) {
-      if (employee.phoneNbrs && employee.phoneNbrs.length > 0) {
-        return employee.phoneNbrs[0];
+      if (employee.phone && employee.phone.length > 0) {
+        return employee.phone;
       } else {
         return "";
       }

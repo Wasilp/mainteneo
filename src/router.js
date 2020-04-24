@@ -120,7 +120,7 @@ const router = new Router({
       }
     },
     {
-      path: '/intervention/:installationId/:interventionNbr',
+      path: '/intervention/:installationId/:interventionNumber',
       name: 'Intervention',
       component: loadView('Intervention'),
       meta: {
@@ -139,6 +139,14 @@ const router = new Router({
       path: '/installation/:id',
       name: 'Installation',
       component: loadView('Installation'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/addInstallation',
+      name: 'AddInstallation',
+      component: loadView('AddInstallation'),
       meta: {
         requiresAuth: true
       }

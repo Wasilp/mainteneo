@@ -10,7 +10,7 @@
               <span class="content-title">{{ $t('views.interventions.listing.title') }}</span>
             </v-flex>
             <v-flex xs12>
-              <interventions-table :query="[['groupBy','interventionNbr']]"></interventions-table>
+              <interventions-table :query="[['groupBy','interventionNumber']]"></interventions-table>
             </v-flex>
           </v-layout>
         </v-container>

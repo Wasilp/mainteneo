@@ -27,11 +27,11 @@
       >
         <template slot="items" slot-scope="props">
           <td class>
-            <a @click.stop="navigateTo('/tank/' + props.item.fromTankId)">{{props.item.fromTankSn}}</a>
+            <a @click.stop="navigateTo('/tank/' + props.item.fromTankId)">{{props.item.sN}}</a>
           </td>
-          <td class>{{ props.item.interventionNbr }}</td>
-          <td class>{{ props.item.refrigerant }}</td>
-          <td class>{{ props.item.eventQuantity}} kg</td>
+          <td class>{{ props.item.interventionId}}</td>
+          <td class>{{ props.item.gas }}</td>
+          <td class>{{ props.item.load}} kg</td>
           <td class>{{ props.item.actionDate.toDate() | formatDate }}</td>
           <td class nowrap>
             <div v-if="props.item.eventQuantity > 0" key="quantityPositive">
@@ -40,7 +40,7 @@
             </div>
             <div v-else key="quantityNegative">
               <v-icon color="#D32F2F" small>arrow_downward</v-icon>
-              {{ Math.abs(props.item.eventQuantity) }} kg {{ $t('dataTables.customerInstallationsEventTable.headers.recovered') }}
+              {{ Math.abs(props.item.gasFlowQuantity) }} kg {{ $t('dataTables.customerInstallationsEventTable.headers.recovered') }}
             </div>
           </td>
           <td class>
@@ -48,7 +48,7 @@
               @click.stop="navigateTo('/employee/' + props.item.actionById)"
             >{{props.item.actionByName}}</a>
           </td>
-          <td class>{{ props.item.eventComments }}</td>
+          <td class>{{ props.item.comment }}</td>
         </template>
       </v-data-table>
     </v-card-text>
@@ -87,6 +87,7 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else {
+          console.log(response,'intervention gas')
         this.customerInstallationEventsItems = response;
       }
     }
@@ -149,9 +150,11 @@ export default {
     const payload = {};
     if (this.query) {
       payload.query = this.query;
+
+      console.log(payload.query)
     }
     this.$store
-      .dispatch("fetchCustomerInstallationHistory", payload)
+      .dispatch("fetchTankEvents", payload)
       .then(this.installationEventsDataCallback);
   }
 };

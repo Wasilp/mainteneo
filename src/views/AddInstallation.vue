@@ -6,7 +6,7 @@
             <v-form v-model="valid" class="form-element">
                 <v-flex sm12 class="page-title">
                     <h3>Ajouter une installation</h3>
-                </v-flex>   
+                </v-flex>
                 <v-flex sm12>
                     <v-widget title="Informations de la centrale de l'installation">
                         <div slot="widget-content">
@@ -20,7 +20,7 @@
                                         v-model="installation.sN"
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout>                                                    
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Marque</v-subheader>
@@ -36,7 +36,7 @@
                                         item-value="id"
                                     ></v-select>
                                 </v-flex>
-                            </v-layout> 
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Modèle</v-subheader>
@@ -46,7 +46,7 @@
                                         v-model="installation.model"
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout> 
+                            </v-layout>
                              <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Type</v-subheader>
@@ -62,7 +62,7 @@
                                         item-value="id"
                                     ></v-select>
                                 </v-flex>
-                            </v-layout>  
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Puissance</v-subheader>
@@ -82,7 +82,7 @@
                                         v-model="installation.capacity"
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout> 
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Customer</v-subheader>
@@ -100,7 +100,7 @@
                                         return-object="true"
                                     ></v-select>
                                 </v-flex>
-                            </v-layout> 
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Groupe d'installation</v-subheader>
@@ -115,7 +115,7 @@
                                         required
                                     ></v-select>
                                 </v-flex>
-                            </v-layout>  
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Location</v-subheader>
@@ -125,7 +125,7 @@
                                         v-model="installation.location"
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout>                            
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Date d'installation</v-subheader>
@@ -138,9 +138,9 @@
                                         type="date"
                                         v-model="installation.installationDate"
                                         required
-                                    ></v-text-field>   
+                                    ></v-text-field>
                                 </v-flex>
-                            </v-layout> 
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs3>
                                     <v-subheader>Remarque</v-subheader>
@@ -150,13 +150,13 @@
                                         v-model="installation.comments"
                                     ></v-text-field>
                                 </v-flex>
-                            </v-layout>                                                       
+                            </v-layout>
                             <v-layout row>
                                 <v-flex xs4>
                                 </v-flex>
                                 <v-flex xs8>
                                     <v-btn outline @click="submit" color="primary">Enregistrer</v-btn>
-                                    <v-btn outline @click="clear">Reset</v-btn> 
+                                    <v-btn outline @click="clear">Reset</v-btn>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -170,7 +170,7 @@
 <script>
 import VWidget from '@/components/VWidget';
 export default {
-  name: 'add-installation',
+  name: 'AddInstallation',
   components: {
     VWidget
   },
@@ -240,6 +240,8 @@ export default {
             console.log("Error: "+error);
         } else{
             this.customersItems = response;
+
+            console.log(response)
         }
     },
     createdDataCallback(response, error){
@@ -255,9 +257,23 @@ export default {
         }
     }
   },
-  created:  function() {
-    const payload={};
-    this.$store.dispatch("fetchCustomers", payload).then(this.customersDataCallback);
+  created: function() {
+      const payload = {};
+
+      this.$store
+          .dispatch("fetchCustomers", payload)
+          .then(querySnapshot => {
+              let customersArray = [];
+              querySnapshot.forEach(doc => {
+                  let customer = doc.data();
+                  customer.id = doc.id;
+                  customersArray.push(customer);
+              });
+              this.customersItems = customersArray;
+          })
+          .catch(function(error) {
+              console.log("Error getting documents: ", error);
+          });
   }
 }
 </script>

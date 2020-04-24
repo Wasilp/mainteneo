@@ -274,10 +274,12 @@
     },
     "interventionType": {
       "startup": "Commissioning",
-      "maintenance": "Onderhoud",
-      "coldMounting": "Koude montage",
-      "coldRepair": "Problemen met koeling oplossen",
-      "electricalRepair": "Elektrische problemen oplossen"
+      "maintenanceColdInstallation": "Maintenance cold installation",
+      "maintenanceHeatPumpAirConditionning": "Maintenance heat pump air conditionning",
+      "leakingControl": "Leaking control",
+      "repair": "oplossen",
+      "recoveryRecyclingDestruction": "Recovery recycling destruction",
+      "pressureControl": "Pressure control"
     },
     "tankEventType": {
       "add": "Cchepping",

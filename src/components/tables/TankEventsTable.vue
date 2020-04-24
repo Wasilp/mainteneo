@@ -27,8 +27,8 @@
       >
         <template slot="items" slot-scope="props">
           <td class>{{ props.item.sN }}</td>
-          <td class>{{ props.item.refrigerant }}</td>
-          <td class>{{ props.item.quantity}} kg</td>
+          <td class>{{ props.item.gas }}</td>
+          <td class>{{ props.item.load}} kg</td>
           <td class>
             <span v-if="props.item.actionType == 0">{{ $t('dropdownMenus.tankEventType.add') }}</span>
             <span v-if="props.item.actionType == 1">{{ $t('dropdownMenus.tankEventType.take') }}</span>
@@ -61,8 +61,8 @@
           </td>
           <td class>
             <a
-              @click.stop="navigateTo('/installation/' + props.item.toMachineId)"
-            >{{props.item.toMachineCurrentQr}}</a>
+              @click.stop="navigateTo('/installation/' + props.item.installationId)"
+            >{{props.item.installationSn}}</a>
           </td>
           <td class>
             <span v-if="props.item.actionType == 1"></span>
@@ -70,8 +70,8 @@
             <span v-else-if="props.item.actionType == 3"></span>
             <span v-else-if="props.item.actionType == 4">
               <a
-                @click.stop="navigateTo('/customer/' + props.item.CustReleasedId)"
-              >{{props.item.custNameReleased}}</a>
+                @click.stop="navigateTo('/customer/' + props.item.customerId)"
+              >{{props.item.customerSiteName}}</a>
             </span>
             <span v-else-if="props.item.actionType == 5">//TODO Supplier Name</span>
           </td>
@@ -80,7 +80,7 @@
               @click.stop="navigateTo('/employee/' + props.item.actionById)"
             >{{props.item.actionByName}}</a>
           </td>
-          <td class>{{ props.item.eventComments }}</td>
+          <td class>{{ props.item.comment }}</td>
         </template>
       </v-data-table>
     </v-card-text>
@@ -118,6 +118,8 @@ export default {
         console.log("Error: " + error);
       } else {
         this.tankEventsItems = response;
+
+        console.log(this.tankEventsItems,'TANKEVENT')
       }
     }
   },
@@ -171,6 +173,8 @@ export default {
     const payload = {};
     if (this.query) {
       payload.query = this.query;
+
+      console.log(payload.query)
     }
     this.$store
       .dispatch("fetchTankEvents", payload)

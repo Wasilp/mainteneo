@@ -88,8 +88,11 @@ export const actions = {
     if (payload.query) {
       payload.query.forEach(element => {
         const field = element[0];
+        console.log(field,'field')
         const operator = element[1];
+        console.log(operator,'operator')
         const value = element[2];
+        console.log(value,'value')
         query = query.where(field, operator, value);
       });
     }

@@ -34,9 +34,9 @@
               <v-layout row wrap>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.type') }}:</label>
-                  <span v-if="tank.currentType==1">{{ $t('dropdownMenus.tankType.fluid') }}</span>
-                  <span v-else-if="tank.currentType==2">{{ $t('dropdownMenus.tankType.transfer') }}</span>
-                  <span v-else-if="tank.currentType==3">{{ $t('dropdownMenus.tankType.recovery') }}</span>
+                  <span v-if="tank.type==1">{{ $t('dropdownMenus.tankType.fluid') }}</span>
+                  <span v-else-if="tank.type==2">{{ $t('dropdownMenus.tankType.transfer') }}</span>
+                  <span v-else-if="tank.type==3">{{ $t('dropdownMenus.tankType.recovery') }}</span>
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.tank.capacity') }}:</label>
@@ -114,93 +114,17 @@
               {{ $t('views.tank.events') }}
               <v-icon class="tab-icon">compare_arrows</v-icon>
             </v-tab>
-            <!-- <v-tab href="#tab-3">Owers
-              <v-icon class="tab-icon">directions_walk</v-icon>
-            </v-tab>-->
-            <!-- <v-tab href="#tab-4">Statistiques
-              <v-icon class="tab-icon">dashboard</v-icon>
-            </v-tab>-->
+
+
             <v-tab-item id="tab-1" key="1">
               <interventions-table
-                :query="[['groupBy','interventionNbr'], ['fromTankId', '==', this.$route.params.id]]"
-              ></interventions-table>
+                :query="[['groupBy','interventionNumber'], ['tankId', '==', this.$route.params.id]]">
+                </interventions-table>
             </v-tab-item>
             <v-tab-item id="tab-2" key="2">
-              <tank-events-table :query="[['tankId', '==', this.$route.params.id]]"></tank-events-table>
+              <tank-events-table :query="[['allTanksLiveId', '==', tank.allTanksLiveId]]"></tank-events-table>
             </v-tab-item>
-            <!-- <v-tab-item id="tab-3" key="3">
-              <employees-table></employees-table>
-            </v-tab-item>-->
-            <!-- Statistic TAB
-            <v-tab-item id="tab-4" key="4">
-              <v-layout row wrap>
-                 mini statistic start
-                <v-flex lg3 sm6 xs12></v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-arrow-down"
-                      title="3,9"
-                      sub-title="TeqCO²"
-                      color="green"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-arrow-up"
-                      title="2,13"
-                      sub-title="TeqCO²"
-                      color="red"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                <v-flex lg3 sm6 xs12></v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-fire"
-                      title="200"
-                      sub-title="BONBONNES SCANNEES"
-                      color="light-blue"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-file-text"
-                      title="150"
-                      sub-title="INTERVENTIONS"
-                      color="purple"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-plus"
-                      title="10"
-                      sub-title="MISES EN ROUTE"
-                      color="light-green"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                <v-flex lg3 sm6 xs12>
-                  <v-card class="block-element">
-                    <mini-statistic
-                      icon="fa fa-arrow-up"
-                      title="60"
-                      sub-title="DEPANNAGES"
-                      color="grey"
-                    ></mini-statistic>
-                  </v-card>
-                </v-flex>
-                mini statistic  end
-              </v-layout>
-            </v-tab-item>
-            END statistic Tab-->
+
           </v-tabs>
         </v-flex>
       </div>
@@ -231,7 +155,8 @@ export default {
   data() {
     return {
       tank: {},
-      color: Material
+      color: Material,
+      tankHistory:{}
     };
   },
   computed: {
@@ -247,17 +172,34 @@ export default {
         console.log("Error: " + error);
       } else if (response) {
         this.tank = response;
+
+        console.log(this.tank)
       } else {
         navigateTo("404");
       }
-    }
+  },
+
+    tankDataHistory(response, error) {
+        // const payload = {};
+        //
+        // alert('kikou')
+        // if (this.$route.params.id) {
+        //   payload.tankId = this.$route.params.id;
+        // }
+        //
+        // this.$store.dispatch("fetchTankEvents", payload).then(function(response){
+        //     console.log(response,'history')
+        //
+        //     alert('kikou')
+        // });
+  }
   },
   created: function() {
     const payload = {};
     if (this.$route.params.id) {
       payload.tankId = this.$route.params.id;
     }
-    this.$store.dispatch("fetchTank", payload).then(this.tankDataCallback);
+    this.$store.dispatch("fetchTank", payload).then(this.tankDataCallback,this.tankDataHistory);
   }
 };
 </script>

@@ -17,7 +17,7 @@ export const actions = {
     const refrigCompCustomerInstallationHistoryCollecRef = refrigCompRef.collection('interventions');
     //Base Query
     let query = refrigCompCustomerInstallationHistoryCollecRef.where('createdByrefrigCompanyId','==',compId);
-    let groupByKey = null;
+    let groupByKey;
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {
@@ -39,18 +39,17 @@ export const actions = {
           querySnapshot.forEach(doc => {
             let customerInstallationHistory = doc.data();
             customerInstallationHistory.id = doc.id;
-            console.log(doc.id)
             customerInstallationHistoryArray.push(customerInstallationHistory);
           });
-          if (groupByKey) {
-            let arrayNew = UTIL.groupBy(
-              customerInstallationHistoryArray,
-              groupByKey
-            );
-            resolve(arrayNew);
-          } else {
+          // if (groupByKey) {
+          //   let arrayNew = UTIL.groupBy(
+          //     customerInstallationHistoryArray,
+          //     groupByKey
+          //   );
+          //   resolve(arrayNew);
+          // } else {
             resolve(customerInstallationHistoryArray);
-          }
+          // }
         })
         .catch(function(error) {
           console.log('Error getting documents: ', error);
@@ -62,16 +61,15 @@ export const actions = {
     //payload is an object with the following properties:
     //file
     //interventionId
-    const compId = rootState.userProfile.compId;
-    const compName = rootState.userProfile.compName;
+    const compId = rootState.userProfile.refrigCompanyId;
+    const compName = rootState.userProfile.refrigCompanyName;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
 
     const refrigCompInterventionFilesCollection = refrigCompRef.collection(
-      'interventionFiles'
+      'interventionsFile'
     );
 
     const interventionId = payload.interventionId;
-
     const file = payload.file;
     const fileName = file.name;
 

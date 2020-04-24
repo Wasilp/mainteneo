@@ -33,7 +33,7 @@
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.employee.email') }}:</label>
-                  {{user.email}}
+                  {{user.emailId}}
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.employee.language') }}:</label>
@@ -44,7 +44,7 @@
                 </v-flex>-->
                 <v-flex sm6>
                   <label>{{ $t('views.employee.role') }}:</label>
-                  {{user.userType}}
+                  {{user.role}}
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -67,7 +67,7 @@
             </v-tab>
             <v-tab-item value="tab-1" key="1">
               <interventions-table
-                :query="[['groupBy','interventionNbr'], ['actionById', '==', this.$route.params.id]]"
+                :query="[['groupBy','interventionNumber'], ['actionByUserId', '==', this.$route.params.id]]"
               ></interventions-table>
             </v-tab-item>
             <v-tab-item value="tab-2" key="2">
@@ -80,7 +80,7 @@
                 <tank-events-table :query="[['actionById','==', this.$route.params.id]]"></tank-events-table>
               </v-card>
             </v-tab-item>
-            <!-- Statistic 
+            <!-- Statistic
                         <v-tab-item id="tab-3" key="3">
                             <v-layout row wrap>
                                 mini statistic start
@@ -92,57 +92,57 @@
                                             icon="fa fa-arrow-down"
                                             title="3,9"
                                             sub-title="TeqCO²"
-                                            color="green"    
-    
+                                            color="green"
+
                                         >
-                                        </mini-statistic>  
+                                        </mini-statistic>
                                     </v-card>
                                 </v-flex>
                                 <v-flex lg3 sm6 xs12>
                                     <v-card class="block-element">
                                         <mini-statistic
-                                            icon="fa fa-arrow-up"                                            
+                                            icon="fa fa-arrow-up"
                                             title="2,13"
                                             sub-title="TeqCO²"
-                                            color="red"      
+                                            color="red"
                                         >
-                                        </mini-statistic>           
+                                        </mini-statistic>
                                     </v-card>
-                                </v-flex>   
+                                </v-flex>
                                 <v-flex lg3 sm6 xs12>
-                                </v-flex>       
+                                </v-flex>
                                 <v-flex lg3 sm6 xs12>
                                     <v-card class="block-element">
                                         <mini-statistic
                                             icon="fa fa-fire"
                                             title="200"
                                             sub-title="BONBONNES SCANNEES"
-                                            color="light-blue"      
+                                            color="light-blue"
                                         >
-                                        </mini-statistic>  
-                                    </v-card>          
-                                </v-flex>        
+                                        </mini-statistic>
+                                    </v-card>
+                                </v-flex>
                                 <v-flex lg3 sm6 xs12>
                                     <v-card class="block-element">
                                         <mini-statistic
                                             icon="fa fa-file-text"
                                             title="150"
                                             sub-title="INTERVENTIONS"
-                                            color="purple"      
+                                            color="purple"
                                         >
-                                        </mini-statistic>         
-                                    </v-card>    
-                                </v-flex>   
+                                        </mini-statistic>
+                                    </v-card>
+                                </v-flex>
                                 <v-flex lg3 sm6 xs12>
                                     <v-card class="block-element">
                                         <mini-statistic
                                             icon="fa fa-plus"
                                             title="10"
                                             sub-title="MISES EN ROUTE"
-                                            color="light-green"    
-    
+                                            color="light-green"
+
                                         >
-                                        </mini-statistic>  
+                                        </mini-statistic>
                                     </v-card>
                                 </v-flex>
                                 <v-flex lg3 sm6 xs12>
@@ -151,12 +151,12 @@
                                             icon="fa fa-arrow-up"
                                             title="60"
                                             sub-title="DEPANNAGES"
-                                            color="grey"      
+                                            color="grey"
                                         >
-                                        </mini-statistic>           
+                                        </mini-statistic>
                                     </v-card>
-                                </v-flex>                                           
-                                mini statistic  end 
+                                </v-flex>
+                                mini statistic  end
                             </v-layout>
                             <v-spacer></v-spacer>
                         </v-tab-item>
@@ -204,11 +204,13 @@ export default {
         console.log("Error: " + error);
       } else {
         this.user = response;
+        alert('coucou')
+        console.log(this.user,'employee')
       }
     },
     phoneNumber: function(employee) {
-      if (employee.phoneNbrs && employee.phoneNbrs.length > 0) {
-        return employee.phoneNbrs[0];
+      if (employee.phone && employee.phone.length > 0) {
+        return employee.phone;
       } else {
         return "";
       }

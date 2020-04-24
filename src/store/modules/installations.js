@@ -90,9 +90,8 @@ export const actions = {
     const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const installationDocRef = refrigCompRef
-      .collection('customerInstallations')
+      .collection('installations')
       .doc(payload.installationId);
-
     return new Promise((resolve, reject) => {
       installationDocRef
         .get()
@@ -120,11 +119,11 @@ export const actions = {
     const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomerInstallationsCollecRef = refrigCompRef.collection(
-      'customerInstallations'
+      'installations'
     );
     //Base Query
     let query = refrigCompCustomerInstallationsCollecRef.where(
-      'compId',
+      'refrigCompanyId',
       '==',
       compId
     );
