@@ -29,7 +29,7 @@
             <td class>{{ props.item.userName }}</td>
             <td class>{{ phoneNumber(props.item) }}</td>
             <td class>{{ props.item.emailId}}</td>
-            <td class>{{ props.item.lng }}</td>
+            <!-- <td class>{{ props.item.lng }}</td> -->
             <td class>{{ props.item.role }}</td>
           </tr>
         </template>
@@ -88,10 +88,10 @@ export default {
           text: this.$i18n.t("dataTables.employeesTable.headers.email"),
           value: "email"
         },
-        {
-          text: this.$i18n.t("dataTables.employeesTable.headers.language"),
-          value: "lng"
-        },
+        // {
+        //   text: this.$i18n.t("dataTables.employeesTable.headers.language"),
+        //   value: "lng"
+        // },
         // { text: this.$i18n.t("dataTables.employeesTable.headers.timezone"), value: 'timezone' },
         {
           text: this.$i18n.t("dataTables.employeesTable.headers.role"),

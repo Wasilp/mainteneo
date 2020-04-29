@@ -105,7 +105,6 @@
                     <div class="media-content flex transparent">
                       <vue-perfect-scrollbar class="media-content--warp">
                         <v-container fluid >
-                          <v-layout row wrap class="x-grid-lg">
                             <v-flex
                               lg4
                               sm12
@@ -113,6 +112,9 @@
                               class="pa-2"
                               v-for="(item, id) in interventionFiles"
                               :key="id">
+
+
+                               <v-layout row wrap class="x-grid-lg">
                               <a @click="openFile(item.downloadURL, id)" class="d-flex">
                                 <v-card flat tile class="media-detail">
                                   <v-card-media height="150px" width="150px" style="margin:auto;">
@@ -130,8 +132,10 @@
                                   </v-card-text>
                                 </v-card>
                               </a>
+
+                              </v-layout>
                             </v-flex>
-                          </v-layout>
+
                         </v-container>
                       </vue-perfect-scrollbar>
                     </div>
@@ -260,28 +264,26 @@ export default {
         return "insert_drive_file";
       }
     },
-    setInterventionFilesListener() {
+    async setInterventionFilesListener() {
 
       const interventionId = this.$route.params.interventionNumber;
+
       const compId = this.$store.state.userProfile.refrigCompanyId;
       const refrigCompRef = fb.db.collection("refrigCompanies").doc(compId);
-      const refrigCompInterventionFilesCollection = refrigCompRef.collection("interventionsFile")
+      const refrigCompInterventionFilesCollection = refrigCompRef.collection("interventionsFile");
 
-     refrigCompInterventionFilesCollection
-        // NEED TO FIX FirebaseError: The query requires an index.
-        // .where("compId", "==", compId)
-        // .where("interventionId", "==", interventionId)
-        // .orderBy("uploadDate", "desc")
-        .onSnapshot(function(querySnapshot){
-            var filesArray = [];
-            querySnapshot.forEach(doc => {
-              let file = doc.data();
-              file.id = doc.id;
-              filesArray.push(file);
-            });
-            this.interventionFiles = filesArray;
-
-            console.log(this.interventionFiles)
+    await refrigCompInterventionFilesCollection
+    // .where("compId", "==", compId)
+    // .where("interventionId", "==", interventionId)
+    .orderBy("uploadDate", "desc")
+    .onSnapshot((querySnapshot)=>{
+                var filesArray = [];
+                querySnapshot.forEach(doc => {
+                  let file = doc.data();
+                  file.id = doc.id;
+                  filesArray.push(file);
+                })
+                this.interventionFiles = filesArray
           },
           error => {
             //TODO: treat error

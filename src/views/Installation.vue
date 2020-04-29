@@ -117,10 +117,10 @@
                           <label>Type d’Unité Extérieure:</label>
                           {{ this.$t("views.installation.externalUnits."+installation.type+"") }}
                         </v-flex>
-                        <v-flex sm4 class="mb-3 top-table-text" v-if="installation.type == '1'">
+                        <!-- <v-flex sm4 class="mb-3 top-table-text" v-if="installation.type == '1'">
                           <label>Tension:</label>
                           {{ installation.tension }}
-                        </v-flex>
+                        </v-flex> -->
 
                         <v-flex sm12 class="mb-3">
                           <v-divider></v-divider>
@@ -159,18 +159,18 @@
               {{ $t('views.installation.interventions') }}
               <v-icon class="tab-icon">library_books</v-icon>
             </v-tab>
-            <v-tab href="#tab-2" v-if="installation.type == '1'">
+            <!-- <v-tab href="#tab-2" v-if="installation.type == '1'">
               {{ $t('views.installation.internalUnits') }}
               <v-icon class="tab-icon">ballot</v-icon>
-            </v-tab>
+            </v-tab> -->
             <v-tab-item id="tab-1" key="1">
               <interventions-table
                 :query="[['groupBy','interventionNumber'], ['installationId', '==', this.$route.params.id]]"
               ></interventions-table>
             </v-tab-item>
-            <v-tab-item id="tab-2" key="2" v-if="installation.type == '1'">
+            <!-- <v-tab-item id="tab-2" key="2" v-if="installation.type == '1'">
               <intervention-internal-units-table :internalUnits="installation.internalUnitLines"></intervention-internal-units-table>
-            </v-tab-item>
+            </v-tab-item> -->
           </v-tabs>
         </v-flex>
       </div>
