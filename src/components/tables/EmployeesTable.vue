@@ -61,6 +61,8 @@ export default {
         //TODO
         console.log("Error: " + error);
       } else {
+
+      console.log(response)
         this.usersItems = response;
       }
     },

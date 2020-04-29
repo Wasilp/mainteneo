@@ -220,6 +220,8 @@ export default {
   created: function() {
     const payload = {};
     if (this.$route.params.id) {
+
+    alert(this.$route.params.id)
       payload.userId = this.$route.params.id;
     }
     this.$store.dispatch("fetchUser", payload).then(this.userDataCallback);

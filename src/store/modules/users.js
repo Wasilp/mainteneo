@@ -29,7 +29,7 @@ export const actions = {
   fetchUser({ commit, rootState }, payload) {
     //RW Permissions
     const compId = rootState.userProfile.refrigCompanyId;
-    const userRef = fb.db.collection(USERS_COLLECTON).doc(fb.auth.currentUser.uid);
+    const userRef = fb.db.collection(USERS_COLLECTON).doc(payload.userId);
     return new Promise((resolve, reject) => {
       userRef
         .get()
