@@ -274,7 +274,9 @@ export default {
 
     await refrigCompInterventionFilesCollection
     // .where("compId", "==", compId)
-     .where("interventionId", "==", interventionId)
+
+    // NEED TO FIX WHERE CONDITION 
+     // .where("interventionId", "==", interventionId)
     .orderBy("uploadDate", "desc")
     .onSnapshot((querySnapshot)=>{
                 var filesArray = [];

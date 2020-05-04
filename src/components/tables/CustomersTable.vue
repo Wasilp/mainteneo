@@ -43,7 +43,7 @@ export default {
     data() {
         return {
             search: "",
-            onDelete:true,
+            onDelete: true,
             pagination: {
                 sortBy: "name",
                 descending: false
@@ -68,7 +68,7 @@ export default {
             let id = props.item.id
             let index = props.index
 
-             this.customersItems.splice(index, 1);
+            this.customersItems.splice(index, 1);
 
             this.$store.dispatch("deleteCustomerByid", id).then(docRef => {
                 this.$snotify.success(

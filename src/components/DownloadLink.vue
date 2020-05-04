@@ -1,8 +1,9 @@
 <template>
-<v-icon>mdi-download</v-icon>
+<v-icon>download</v-icon>
 </template>
 <script>
 import XLSX from 'xlsx'
+import { mdiDownload } from '@mdi/js';
 export default {
     name: "download-link",
     props: {
@@ -17,6 +18,7 @@ export default {
             // export json to Worksheet of Excel
             // only array possible
             var WS = XLSX.utils.json_to_sheet(this.dataParent)
+
 
             // A workbook is the name given to an Excel file
             var wb = XLSX.utils.book_new() // make Workbook of Excel
