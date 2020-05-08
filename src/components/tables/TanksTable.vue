@@ -1,18 +1,18 @@
-<template>
+dowload<template>
 <v-card>
     <v-toolbar card color="white">
         <v-text-field flat solo prepend-icon="search" :placeholder="this.$i18n.t('dataTables.tanksTable.search')" v-model="search" hide-details class="hidden-sm-and-down"></v-text-field>
         <v-btn icon>
             <v-icon>filter_list</v-icon>
         </v-btn>
-        <v-btn icon @click="exportChild">
+        <v-btn icon  @click="tableToExcel()">
 
-            <download-link ref="childRef" :dataParent="this.xlsxItems" :parentName="this.$options.name"></download-link>
+            <download-link ref="childRef"></download-link>
         </v-btn>
     </v-toolbar>
     <v-divider></v-divider>
     <v-card-text class="pa-0">
-        <v-data-table :headers="headers" :search="search" :items="tanksItems" :rows-per-page-items="[10,25,50,{text:'All','value':-1}]" :pagination.sync="pagination" class="elevation-1" item-key="id" v-model="selected">
+        <v-data-table id="table" :headers="headers" :search="search" :items="tanksItems" :rows-per-page-items="[10,25,50,{text:'All','value':-1}]" :pagination.sync="pagination" class="elevation-1" item-key="id" v-model="selected">
             <template slot="items" slot-scope="props">
                 <tr @click.stop="navigateTo('/tank/' + props.item.id)" :style="{ cursor: 'pointer'}">
                     <td class nowrap>{{ props.item.sN }}</td>
@@ -68,15 +68,14 @@ export default {
             },
             selected: [],
             tanksItems: [],
-            xlsxItems: [],
-            fields: "sN,type,capacity,tare,load,gas,status,customerName,gasProviderCompanyName,lastUpdated",
             showVehiclesUI: false
         };
     },
     methods: {
-
-        exportChild() {
-            this.$refs.childRef.onExport();
+        tableToExcel() {
+            var name = 'Tanks list'
+            var table = document.getElementById('table');
+            this.$refs.childRef.onExport(table, name);
         },
         navigateTo(target) {
             this.$router.push(target);
@@ -93,29 +92,8 @@ export default {
                 //TODO
                 console.log("Error: " + error);
             } else {
-
                 console.log(response, 'liste tanks')
-
-                var that = this
                 this.tanksItems = response;
-
-                var temp = {};
-                for (var i = 0; i < response.length; i++) {
-                that.xlsxItems.push({
-                        Serialnumber: response[i].sN,
-                        Type: response[i].type,
-                        Capacity: response[i].capacity,
-                        Tare: response[i].tare,
-                        Load: response[i].load,
-                        Gas: response[i].gas,
-                        Status: response[i].status,
-                        CustomerName: response[i].customerName,
-                        GasProviderCompanyName: response[i].gasProviderCompanyName,
-                        LastUpdated: response[i].lastUpdated
-                    })
-                }
-                console.log(that.xlsxItems)
-
             }
         }
     },

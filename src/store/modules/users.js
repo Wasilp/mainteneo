@@ -75,6 +75,8 @@ export const actions = {
           let usersArray = [];
           querySnapshot.forEach(doc => {
             let user = doc.data();
+            let role = doc.data().role;
+
             user.id = doc.id;
             usersArray.push(user);
           });
@@ -82,7 +84,7 @@ export const actions = {
         })
         .catch(function(error) {
           console.log('Error getting documents: ', error);
-          resject(error);
+          reject(error);
         });
     });
   },
@@ -91,15 +93,14 @@ export const actions = {
    * Web auth request
    */
   webAuthRequest(countryCode, phoneNumber) {
-    var webAuthRequestFunction = fb.functions.httpsCallable('webAuthRequest');
+    var webAuthRequestFunction = fb.functions.httpsCallable('authRequest');
     // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
 
-    const requestUniqueKey = UTIL.getUniqueID();
+    // const requestUniqueKey = UTIL.getUniqueID();
     const data = {
-      requestUniqueKey : requestUniqueKey,
+      // requestUniqueKey : requestUniqueKey,
       countryCode : countryCode,
-      phoneNumber : phoneNumber,
-      // verificationCode  : '123456'
+      phoneNumber : phoneNumber
     }
     return new Promise((resolve, reject) => {
       // authWithCodeRequestFunction(data)
@@ -107,43 +108,45 @@ export const actions = {
 
 
       .then(function(result) {
+          resolve(result.data)
         //listen for change
         // Read result of the Cloud Function.
+        //
+        // const requestId = result.data.requestId;
+        //
+        // var unsubscribe = fb.db.collection(PENDINGWEBAUTHREQUESTS_COLLECTION).doc(requestId)
 
-        const requestId = result.data.requestId;
-
-        var unsubscribe = fb.db.collection(PENDINGWEBAUTHREQUESTS_COLLECTION).doc(requestId)
-
-          .onSnapshot((doc) => {
-
-            let pendingWebAuthRequest = doc.data();
-
-
-              if(pendingWebAuthRequest.authorized === true){
-                if(pendingWebAuthRequest.token){
-                  resolve({status:'success', message: 'Successfully authenticate', token: token})
-                  unsubscribe();
-                }else{
-                  resolve({status:'error', message: 'Something failed please try again'})
-                  unsubscribe();
-                  return;
-                }
-              }else if(pendingWebAuthRequest.authorized === false){
-                resolve({status:'error', message: 'You are not authorized to login with this number'})
-                unsubscribe();
-                return;
-              }
-          }, (error) => {
-            consol.log('plop')
-            reject(error);
-            unsubscribe();
-          });
-      }).catch(function(error) {
-        // Getting the Error details.
-         consol.log('plopcatch')
-        reject(error);
-        unsubscribe();
-      });
+          // .onSnapshot((doc) => {
+          //
+          //   let pendingWebAuthRequest = doc.data();
+          //
+          //
+          //     if(pendingWebAuthRequest.authorized === true){
+          //       if(pendingWebAuthRequest.token){
+          //         resolve({status:'success', message: 'Successfully authenticate', token: token})
+          //         unsubscribe();
+          //       }else{
+          //         resolve({status:'error', message: 'Something failed please try again'})
+          //         unsubscribe();
+          //         return;
+          //       }
+          //     }else if(pendingWebAuthRequest.authorized === false){
+          //       resolve({status:'error', message: 'You are not authorized to login with this number'})
+          //       unsubscribe();
+          //       return;
+          //     }
+          // },
+      //     (error) => {
+      //       consol.log('plop')
+      //       reject(error);
+      //       // unsubscribe();
+      //     };
+      // }).catch(function(error) {
+      //   // Getting the Error details.
+      //   console.log('plopcatch')
+      //   reject(error);
+      //   // unsubscribe();
+        });
     });
   }
 };

@@ -28,7 +28,7 @@
 import {
     mapState
 } from "vuex";
-const fb = require("../../firebaseConfig.js");
+const fb = require('@/firebaseConfig.js');
 export default {
     name: "employees-table",
     props: ["query"],
@@ -36,7 +36,8 @@ export default {
     data() {
         return {
             search: "",
-            usersItems: []
+            usersItems: [],
+            role: []
         };
     },
     methods: {
@@ -51,6 +52,7 @@ export default {
 
                 console.log(response)
                 this.usersItems = response;
+                // this.fetchRole()
             }
         },
         phoneNumber: function(employee) {
@@ -59,7 +61,31 @@ export default {
             } else {
                 return "";
             }
-        }
+        },
+
+
+        // fetchRole: function() {
+        //     //RW Permissions
+
+        //     const userRef = fb.db.collection('userRoles').doc(this.usersItems.role);
+        //     return new Promise((resolve, reject) => {
+        //         userRef
+        //             .get()
+        //             .then(function(doc) {
+        //                 if (doc.exists) {
+        //                     let userRole = doc.data();
+        //                     user.id = doc.id;
+        //                     resolve(userRole);
+        //                 }
+        //             })
+        //
+        //             this.role = userRole
+        //             .catch(function(error) {
+        //                 reject(error);
+        //                 console.log('Error getting document:', error);
+        //             });
+        //     });
+        // },
     },
     computed: {
         ...mapState(["userProfile", "users"]),

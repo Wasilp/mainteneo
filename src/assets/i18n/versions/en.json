@@ -152,7 +152,7 @@
       }
     },
     "login": {
-      "login": "Email",
+      "login": "Phone number",
       "password": "Password",
       "loginButton": "Log In"
     },

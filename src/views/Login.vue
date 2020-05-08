@@ -19,7 +19,7 @@
 
           <v-form class="mb-4">
             <v-text-field
-              v-model.trim="loginForm.email"
+              v-model.trim="loginForm.phoneNumber"
               prepend-icon="phone"
               name="login"
               :label="this.$i18n.t('views.login.login')"
@@ -28,8 +28,39 @@
               color="#5071b6"
             ></v-text-field>
           </v-form>
+          <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
+          <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
+          <div class="extras">
+            <a @click="togglePasswordReset">Forgot Password</a>
+          </div> -->
+        </form>
+
+
+
+        <form v-if="showCodeForm" @submit.prevent>
+          <h1>Verification code</h1>
 
           <v-form class="mb-4">
+            <v-text-field
+            v-model.trim="loginForm.code"
+            prepend-icon="password"
+            name="login"
+            type="password"
+            :label="this.$i18n.t('views.login.password')"
+            placeholder="Password"
+            color="#5071b6"
+            ></v-text-field>
+          </v-form>
+
+
+          <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
+          <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
+          <div class="extras">
+            <a @click="togglePasswordReset">Forgot Password</a>
+          </div> -->
+        </form>
+
+          <!-- <v-form class="mb-4">
             <v-text-field
               v-model.trim="loginForm.password"
               prepend-icon="password"
@@ -39,16 +70,11 @@
               placeholder="Password"
               color="#5071b6"
             ></v-text-field>
-          </v-form>
+          </v-form> -->
 
-          <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
-          <v-btn @click="logout" round large dark color="black">Logout</v-btn>
-          <div class="extras">
-            <a @click="togglePasswordReset">Forgot Password</a>
-          </div>
-        </form>
 
-        <form v-if="showForgotPassword" @submit.prevent class="password-reset">
+
+        <!-- <form v-if="showForgotPassword" @submit.prevent class="password-reset">
           <div v-if="!passwordResetSuccess">
             <h1>Reset password</h1>
             <p>We will send you an email to reset your password</p>
@@ -75,7 +101,7 @@
             <p>check your email for a link to reset your password</p>
             <button @click="togglePasswordReset" class="button">Back to login</button>
           </div>
-        </form>
+        </form> -->
 
         <transition name="fade">
           <div v-if="errorMsg !== ''" class="error-msg">
@@ -94,8 +120,8 @@ export default {
   data() {
     return {
       loginForm: {
-        email: "",
-        password: ""
+        phoneNumber: "",
+        code:""
       },
       signupForm: {
         name: "",
@@ -111,6 +137,7 @@ export default {
       showForgotPassword: false,
       passwordResetSuccess: false,
       performingRequest: false,
+      showCodeForm: false,
       errorMsg: ""
     };
   },
@@ -144,58 +171,70 @@ export default {
       // return;
       // this.performingRequest = true;
 
-      fb.auth
-      .signInWithEmailAndPassword(
-        this.loginForm.email,
-        this.loginForm.password
-      )
-      // Users.actions.webAuthRequest('32', '41001').then((response) => {
-      //   console.log('[web auth request] '+JSON.stringify(response));
-      //   if(response.status === 'success'){
-      //     const token = response.token;
-      //     //new auth
-      //     console.log(response);
-      //     console.log('-------')
-      //     console.log(response.token)
-      //     fb.auth.signInWithCustomToken(token)
-      //     .then((result) => {
-      //       console.log('SUCCESSS '+JSON.stringify(result));
-      //       //TODO
-      //       // this.$store.commit("SET_CURRENT_USER", userCredential.user);
-      //       // this.$store.dispatch("fetchUserProfile");
-      //       // this.$router.push("/dashboard");
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //       this.errorMsg = error.message;
-      //     })
-      //     var currentUser = fb.auth.currentUser;
-      //     console.log(JSON.stringify(currentUser));
-      //   } else if(response.status === 'error'){
-      //     this.errorMsg = response.message;
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.log('[error] '+error)
-      // })
-      // return;
-      // //old
+      // fb.auth
+      // .signInWithEmailAndPassword(
+      //   this.loginForm.email,
+      //   '123456'
+      // )
+
+      console.log(this.loginForm.phoneNumber)
+
+      let countryCode = this.loginForm.phoneNumber.substring(0,2);
+      let phoneNumber = this.loginForm.phoneNumber.substring(2)
+      Users.actions.webAuthRequest(countryCode,phoneNumber).then((response) => {
+
+        console.log('[auth request] '+JSON.stringify(response));
+        if(response.status === 'success'){
+          //new auth
+          console.log(response);
+          console.log('-------')
+          console.log(response)
+
+          this.showCodeForm = true
+          this.showLoginForm = false
+
+          var authWithCode = fb.functions.httpsCallable('authWithCode');
+          // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
+          var auth
+          const data = {
+            countryCode : countryCode,
+            phoneNumber : phoneNumber,
+            verificationCode  : this.loginForm.code
+          }
+            authWithCode(data).then((response) => {
+                fb.auth.signInWithCustomToken(response.data.customToken).then((response) => {
+                    var currentUser = fb.auth.currentUser;
+                    console.log(JSON.stringify(currentUser));
+                     this.$store.commit("SET_CURRENT_USER", currentUser);
+                     //this.$store.dispatch("fetchUserProfile");
+                     this.$router.push("/dashboard");
+                })
+            })
+        } else if(response.status === 'error'){
+          this.errorMsg = response.message;
+        }
+      })
+      .catch((error) => {
+        console.log('[error] '+error)
+      })
+
+      //old
       // fb.auth
       //   .signInWithEmailAndPassword(
       //     this.loginForm.email,
       //     this.loginForm.password
       //   )
-        .then(userCredential => {
-          this.$store.commit("SET_CURRENT_USER", userCredential.user);
-          this.$store.dispatch("fetchUserProfile");
-          //this.performingRequest = false;
-          this.$router.push("/dashboard");
-        })
-        .catch(err => {
-          console.log(err);
-          //this.performingRequest = false;
-          this.errorMsg = err.message;
-        });
+      //   .then(userCredential => {
+      //     this.$store.commit("SET_CURRENT_USER", userCredential.user);
+      //     this.$store.dispatch("fetchUserProfile");
+      //     //this.performingRequest = false;
+      //     this.$router.push("/dashboard");
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //     //this.performingRequest = false;
+      //     this.errorMsg = err.message;
+      //   });
     },
     logout() {
       fb.auth.signOut()

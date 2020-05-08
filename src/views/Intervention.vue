@@ -273,10 +273,8 @@ export default {
       const refrigCompInterventionFilesCollection = refrigCompRef.collection("interventionsFile");
 
     await refrigCompInterventionFilesCollection
-    // .where("compId", "==", compId)
-
-    // NEED TO FIX WHERE CONDITION 
-     // .where("interventionId", "==", interventionId)
+    .where("compId", "==", compId)
+    .where("interventionId", "==", interventionId)
     .orderBy("uploadDate", "desc")
     .onSnapshot((querySnapshot)=>{
                 var filesArray = [];
