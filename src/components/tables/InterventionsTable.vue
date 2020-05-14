@@ -66,6 +66,8 @@ export default {
 
                 this.interventionItems = response;
 
+                console.log(response,'intervention')
+
 
             }
         }

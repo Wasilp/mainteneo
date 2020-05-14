@@ -15,7 +15,7 @@
                     <td class>{{ phoneNumber(props.item) }}</td>
                     <td class>{{ props.item.emailId}}</td>
                     <!-- <td class>{{ props.item.lng }}</td> -->
-                    <td class>{{ props.item.role }}</td>
+                    <td class>{{ $t('views.employeeType.'+props.item.role) }} </td>
                 </tr>
             </template>
         </v-data-table>

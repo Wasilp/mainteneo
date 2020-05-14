@@ -36,12 +36,15 @@ export const actions = {
       .collection('customers')
       .doc(payload.customerId);
 
+
     const recordMetadata = {
       lastUpdate: fb.fv.serverTimestamp(),
-      lastUpdateByName: rootState.userProfile.userName,
-      lastUpdateById: rootState.userProfile.userId,
+      lastUpdateByUserUserName: rootState.userProfile.userName,
+      compId: compId,
       compName: rootState.userProfile.compName,
-      compId: compId
+      createdByUserId : rootState.currentUser.id,
+      lastUpdatedByUserId : rootState.currentUser.id,
+      lastUpdatedByUserUserName : rootState.currentUser.userName
     };
 
     const updatedCustomer = Object.assign(
@@ -49,7 +52,6 @@ export const actions = {
       payload.updatedCustomer,
       recordMetadata
     );
-
     return customersDocRef.update(updatedCustomer);
   },
   /**

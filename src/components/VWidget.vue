@@ -8,8 +8,8 @@
       </v-toolbar>
       <v-divider v-if="enableHeader"></v-divider>
       <v-card-text :class="contentBg">
-        <slot name="widget-content"></slot>       
-      </v-card-text>       
+        <slot name="widget-content"></slot>
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -36,8 +36,7 @@ export default {
 
     };
   },
-  computed: {
 
-  },  
+
 };
 </script>

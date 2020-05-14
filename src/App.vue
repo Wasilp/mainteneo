@@ -44,4 +44,9 @@ export default {
   padding-top: 2px;
   padding-bottom: 14px;
 }
+
+.selected {
+  background-color: blue;
+  cursor: pointer;
+}
 </style>

@@ -17,6 +17,7 @@ function loadView(view) {
 }
 
 const router = new Router({
+    linkExactActiveClass: "selected",
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [

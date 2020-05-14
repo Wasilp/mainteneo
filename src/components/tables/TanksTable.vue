@@ -17,9 +17,9 @@ dowload<template>
                 <tr @click.stop="navigateTo('/tank/' + props.item.id)" :style="{ cursor: 'pointer'}">
                     <td class nowrap>{{ props.item.sN }}</td>
                     <td class>
-                        <span v-if="props.item.type==1">{{ $t('dropdownMenus.tankType.fluid') }}</span>
-                        <span v-else-if="props.item.type==2">{{ $t('dropdownMenus.tankType.transfer') }}</span>
-                        <span v-else-if="props.item.type==3">{{ $t('dropdownMenus.tankType.recovery') }}</span>
+                        <span v-if="props.item.type==0">{{ $t('dropdownMenus.tankType.fluid') }}</span>
+                        <span v-else-if="props.item.type==1">{{ $t('dropdownMenus.tankType.transfer') }}</span>
+                        <span v-else-if="props.item.type==2">{{ $t('dropdownMenus.tankType.recovery') }}</span>
                     </td>
                     <td class>{{ props.item.capacity }} kg</td>
                     <td class>{{ props.item.load}} kg</td>
@@ -105,7 +105,7 @@ export default {
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.type"),
-                    value: "currentType"
+                    value: "type"
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.capacity"),
@@ -113,15 +113,15 @@ export default {
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.quantity"),
-                    value: "quantity"
+                    value: "tare"
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.load"),
-                    value: ""
+                    value: "load"
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.refrigerant"),
-                    value: "refrigerant"
+                    value: "gas"
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.status"),
@@ -133,11 +133,11 @@ export default {
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.supplier"),
-                    value: "providerCompName"
+                    value: "gasProviderCompanyName"
                 },
                 {
                     text: this.$i18n.t("dataTables.tanksTable.headers.lastUpdate"),
-                    value: "lastUpdate"
+                    value: "lastUpdated"
                 }
             ];
             if (this.showVehiclesUI) {
@@ -150,8 +150,6 @@ export default {
         }
     },
     created: function() {
-
-
         this.$store.state.currentUser
             .getIdTokenResult()
             .then(idTokenResult => {

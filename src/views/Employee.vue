@@ -44,7 +44,7 @@
                 </v-flex>-->
                 <v-flex sm6>
                   <label>{{ $t('views.employee.role') }}:</label>
-                  {{user.role}}
+                 {{ $t('views.employeeType.'+ user.role) }}
                 </v-flex>
               </v-layout>
             </v-flex>

@@ -136,6 +136,12 @@
         "title": "Employees Listing"
       }
     },
+    "employeeType": {
+      "0": "Technician",
+      "1": "accountant",
+      "2": "Secretary",
+      "3": "notdefinedyet"
+    },
     "gasAccounting": {
       "gasAccountingByTank": {
         "title": "Gas Acccounting By Cylinder"
@@ -377,6 +383,7 @@
         "role": "Role"
       }
     },
+
     "customerInstallationsEventTable": {
       "search": "Search...",
       "headers": {

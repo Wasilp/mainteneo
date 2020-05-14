@@ -108,17 +108,23 @@ export default {
   created() {
     console.log("IN CREATED");
     const payload = {};
+
+    console.log(this.$route.params.id,'params')
     if (this.$route.params.id) {
       payload.customerId = this.$route.params.id;
     }
     this.$store
       .dispatch("fetchCustomer", payload)
       .then(doc => {
+
+      console.log(doc,'customer')
         if (doc.exists) {
           let c = doc.data();
 
           c.id = doc.id;
           this.customer = c;
+
+
         } else {
           console.log("No such document!");
         }

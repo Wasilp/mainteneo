@@ -19,12 +19,7 @@
               <v-list-tile-title style="text-transform:uppercase;">{{ item.text }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile
-            v-for="(child, i) in item.children"
-            :key="i"
-            @click="navigateTo(child.link)"
-            style="background-color:#F5F5F5"
-          >
+          <v-list-tile v-for="(child, i) in item.children":key="i" :to='child.link'style="background-color:#F5F5F5">
             <v-list-tile-content>
               <v-list-tile-title style="margin-left:20px">{{ child.text }}</v-list-tile-title>
             </v-list-tile-content>
@@ -226,7 +221,7 @@ export default {
   },
   methods: {
     navigateTo(target) {
-      this.$router.push(target);
+      this.$router.push({path:target});
     }
   },
   computed: {
