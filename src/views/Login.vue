@@ -1,66 +1,52 @@
 <template>
-  <div id="login">
+<div id="login">
     <transition name="fade">
-      <div v-if="performingRequest" class="loading">
-        <p>Loading...</p>
-      </div>
+        <div v-if="performingRequest" class="loading">
+            <p>Loading...</p>
+        </div>
     </transition>
     <section>
-      <div class="col1 text-xs-right">
-        <div class="pr-5">
-          <img src="@/assets/images/logo-large-white.png" height="70px;" style="margin-top: 10px;">
+        <div class="col1 text-xs-right">
+            <div class="pr-5">
+                <img src="@/assets/images/logo-large-white.png" height="70px;" style="margin-top: 10px;">
+            </div>
+            <div class="mainteneo-tagline mt-4 pr-5">The App for HVACR Professionnals</div>
         </div>
-        <div class="mainteneo-tagline mt-4 pr-5">The App for HVACR Professionnals</div>
-      </div>
 
-      <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
-        <form v-if="showLoginForm" @submit.prevent>
-          <h1>Welcome back</h1>
+        <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
+            <form v-if="showLoginForm" @submit.prevent>
+                <h1>Welcome back</h1>
 
-          <v-form class="mb-4">
-            <v-text-field
-              v-model.trim="loginForm.phoneNumber"
-              prepend-icon="phone"
-              name="login"
-              :label="this.$i18n.t('views.login.login')"
-              placeholder="+32478096723"
-              type="text"
-              color="#5071b6"
-            ></v-text-field>
-          </v-form>
-          <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
-          <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
+                <v-form class="mb-4">
+
+                <VuePhoneNumberInput v-model="loginForm.phoneNumber"  @update="countryChanged" prepend-icon="phone"  name="login" :label="this.$i18n.t('views.login.login')" placeholder="+32478096723" type="text" color="#5071b6" />
+
+                </v-form>
+                <v-btn @click="LogNum" round large dark color="#00acc1">LogIn</v-btn>
+                <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
           <div class="extras">
             <a @click="togglePasswordReset">Forgot Password</a>
           </div> -->
-        </form>
+            </form>
 
 
 
-        <form v-if="showCodeForm" @submit.prevent>
-          <h1>Verification code</h1>
+            <form v-if="showCodeForm" @submit.prevent>
+                <h1>Verification code</h1>
 
-          <v-form class="mb-4">
-            <v-text-field
-            v-model.trim="loginForm.code"
-            prepend-icon="password"
-            name="login"
-            type="password"
-            :label="this.$i18n.t('views.login.password')"
-            placeholder="Password"
-            color="#5071b6"
-            ></v-text-field>
-          </v-form>
+                <v-form class="mb-4">
+                    <v-text-field v-model.trim="loginForm.code" prepend-icon="password" name="login" type="password" :label="this.$i18n.t('views.login.password')" placeholder="Password" color="#5071b6"></v-text-field>
+                </v-form>
 
 
-          <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
-          <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
+                <v-btn @click="login" round large dark color="#00acc1">LogIn</v-btn>
+                <!-- <v-btn @click="logout" round large dark color="black">Logout</v-btn>
           <div class="extras">
             <a @click="togglePasswordReset">Forgot Password</a>
           </div> -->
-        </form>
+            </form>
 
-          <!-- <v-form class="mb-4">
+            <!-- <v-form class="mb-4">
             <v-text-field
               v-model.trim="loginForm.password"
               prepend-icon="password"
@@ -74,7 +60,7 @@
 
 
 
-        <!-- <form v-if="showForgotPassword" @submit.prevent class="password-reset">
+            <!-- <form v-if="showForgotPassword" @submit.prevent class="password-reset">
           <div v-if="!passwordResetSuccess">
             <h1>Reset password</h1>
             <p>We will send you an email to reset your password</p>
@@ -103,408 +89,433 @@
           </div>
         </form> -->
 
-        <transition name="fade">
-          <div v-if="errorMsg !== ''" class="error-msg">
-            <p>{{ errorMsg }}</p>
-          </div>
-        </transition>
-      </div>
+            <transition name="fade">
+                <div v-if="errorMsg !== ''" class="error-msg">
+                    <p>{{ errorMsg }}</p>
+                </div>
+            </transition>
+        </div>
     </section>
-  </div>
+</div>
 </template>
 
 <script>
+import VuePhoneNumberInput from 'vue-phone-number-input';
 const fb = require("../firebaseConfig.js");
 const Users = require('../store/modules/users.js')
 export default {
-  data() {
-    return {
-      loginForm: {
-        phoneNumber: "",
-        code:""
+    components: {
+        VuePhoneNumberInput,
       },
-      signupForm: {
-        name: "",
-        title: "",
-        email: "",
-        password: ""
-      },
-      passwordForm: {
-        email: ""
-      },
+    data() {
+        return {
 
-      showLoginForm: true,
-      showForgotPassword: false,
-      passwordResetSuccess: false,
-      performingRequest: false,
-      showCodeForm: false,
-      errorMsg: ""
-    };
-  },
-  methods: {
-    toggleForm() {
-      this.errorMsg = "";
-      this.showLoginForm = !this.showLoginForm;
+            loginForm:{
+                code:'',
+                phoneNumber:'',
+                countryCode:''
+            },
+            signupForm: {
+                name: "",
+                title: "",
+                email: "",
+                password: ""
+            },
+            passwordForm: {
+                email: ""
+            },
+            countryCode: '',
+            phoneNumber: '',
+            showLoginForm: true,
+            showForgotPassword: false,
+            passwordResetSuccess: false,
+            performingRequest: false,
+            showCodeForm: false,
+            errorMsg: ""
+        };
     },
-    togglePasswordReset() {
-      this.errorMsg = "";
-      if (this.showForgotPassword) {
-        this.showLoginForm = true;
-        this.showForgotPassword = false;
-        this.passwordResetSuccess = false;
-      } else {
-        this.showLoginForm = false;
-        this.showForgotPassword = true;
-      }
-    },
-    login() {
-      // console.log('login called')
-      // console.log('HARD LOGIN WITH TOKEN');
-      // var hardToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5nb29nbGVhcGlzLmNvbS9nb29nbGUuaWRlbnRpdHkuaWRlbnRpdHl0b29sa2l0LnYxLklkZW50aXR5VG9vbGtpdCIsImlhdCI6MTU3MTMwNzA0MCwiZXhwIjoxNTcxMzEwNjQwLCJpc3MiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzdWIiOiJtYWludGVuZW8tcmVhY3QtbmF0aXZlLWRldkBhcHBzcG90LmdzZXJ2aWNlYWNjb3VudC5jb20iLCJ1aWQiOiJ2UjFUWFplZDlKVlp3WHlDNUFrYjFyejB0WXAyIn0.QnqggKj5UOCuxWsOGUtNLQSpt7fjyRbmu-TXyuoeGkmc02K7qH71Ep5rA62giMWvXZik3TuQ0dVdnzZ4a2mLGFBmnqTo22pB4bn4drfE9v3yw-k9jm1EeFv_nAQR5wt182XQFWP-Be28ttmFD_MBUiNyRq6sNDBaykJLmpwEUqW_YgpasW5K_VW3isXSN_gd4UjPSM0ZgwCeFad8-qL1czCZjQnum5gNZ0FWbzfrVEIhfEETNGDQaGdJPT3YjHsb3PH0VIgHQn-AuOYzYH0btHRTFt--u1O2dFfkrlefYdbW9QL9Z5Mx2wxMcB88gxAuRlS_IUEj2DYqta6wLmgQ-Q'
-      // fb.auth.signInWithCustomToken(hardToken)
-      // .then((result) => {
-      //   console.log('SUCCESSS '+JSON.stringify(result));
-      //   var currentUser = fb.auth.currentUser;
-      //   console.log('CURRENT USER')
-      //   console.log(JSON.stringify(currentUser));
-      // })
-      // return;
-      // this.performingRequest = true;
+    methods: {
+        toggleForm() {
+            this.errorMsg = "";
+            this.showLoginForm = !this.showLoginForm;
+        },
+        togglePasswordReset() {
+            this.errorMsg = "";
+            if (this.showForgotPassword) {
+                this.showLoginForm = true;
+                this.showForgotPassword = false;
+                this.passwordResetSuccess = false;
+            } else {
+                this.showLoginForm = false;
+                this.showForgotPassword = true;
+            }
+        },
+        // FUNCTION To save and split the phone number
+        countryChanged(phoneMeta){
 
-      // fb.auth
-      // .signInWithEmailAndPassword(
-      //   this.loginForm.email,
-      //   '123456'
-      // )
+        console.log(phoneMeta.countryCallingCode)
+            this.loginForm.countryCode = phoneMeta.countryCallingCode
+        },
+        LogNum() {
+            this.showCodeForm = true
+            this.showLoginForm = false
+        },
+        // Function who's calling authRequest in the store to connect with custom Token created from API
+        login() {
+            Users.actions.authRequest(this.loginForm).then((response) => {
+                    console.log('[auth request] ' + JSON.stringify(response));
+                    if (response.status === 'success') {
+                        //new auth
+                        console.log(response);
+                        console.log('-------')
+                        console.log(response)
 
-      console.log(this.loginForm.phoneNumber)
+                        var authWithCode = fb.functions.httpsCallable('authWithCode');
 
-      let countryCode = this.loginForm.phoneNumber.substring(0,2);
-      let phoneNumber = this.loginForm.phoneNumber.substring(2)
-      Users.actions.webAuthRequest(countryCode,phoneNumber).then((response) => {
+                        console.log(this.loginForm.phoneNumber,'KIKOU')
+                        // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
+                        const data = {
+                            countryCode: this.loginForm.countryCode,
+                            phoneNumber: this.loginForm.phoneNumber,
+                            verificationCode: this.loginForm.code
+                        }
 
-        console.log('[auth request] '+JSON.stringify(response));
-        if(response.status === 'success'){
-          //new auth
-          console.log(response);
-          console.log('-------')
-          console.log(response)
 
-          this.showCodeForm = true
-          this.showLoginForm = false
-
-          var authWithCode = fb.functions.httpsCallable('authWithCode');
-          // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
-          var auth
-          const data = {
-            countryCode : countryCode,
-            phoneNumber : phoneNumber,
-            verificationCode  : this.loginForm.code
-          }
-            authWithCode(data).then((response) => {
-                fb.auth.signInWithCustomToken(response.data.customToken).then((response) => {
-                    var currentUser = fb.auth.currentUser;
-                    console.log(JSON.stringify(currentUser));
-                     this.$store.commit("SET_CURRENT_USER", currentUser);
-                     //this.$store.dispatch("fetchUserProfile");
-                     this.$router.push("/dashboard");
+                        authWithCode(data).then((response) => {
+                            fb.auth.signInWithCustomToken(response.data.customToken).then((response) => {
+                                var currentUser = fb.auth.currentUser;
+                                console.log(JSON.stringify(currentUser));
+                                this.$store.commit("SET_CURRENT_USER", currentUser);
+                                this.$store.dispatch("fetchUserProfile");
+                                this.$router.push("/dashboard");
+                            })
+                        })
+                    } else if (response.status === 'error') {
+                        this.errorMsg = response.message;
+                    }
                 })
-            })
-        } else if(response.status === 'error'){
-          this.errorMsg = response.message;
-        }
-      })
-      .catch((error) => {
-        console.log('[error] '+error)
-      })
+                .catch((error) => {
+                    console.log('[error] ' + error)
+                })
 
-      //old
-      // fb.auth
-      //   .signInWithEmailAndPassword(
-      //     this.loginForm.email,
-      //     this.loginForm.password
-      //   )
-      //   .then(userCredential => {
-      //     this.$store.commit("SET_CURRENT_USER", userCredential.user);
-      //     this.$store.dispatch("fetchUserProfile");
-      //     //this.performingRequest = false;
-      //     this.$router.push("/dashboard");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //     //this.performingRequest = false;
-      //     this.errorMsg = err.message;
-      //   });
-    },
-    logout() {
-      fb.auth.signOut()
-      .then(() => {
-        console.log('signout')
-      })
-      .catch((error) => {
-        console.log('[logout] errror :'+ JSON.stringify(error))
-      })
-    },
-    resetPassword() {
-      //this.performingRequest = true;
-      fb.auth
-        .sendPasswordResetEmail(this.passwordForm.email)
-        .then(() => {
-          //this.performingRequest = false;
-          this.passwordResetSuccess = true;
-          this.passwordForm.email = "";
-        })
-        .catch(err => {
-          console.log(err);
-          //this.performingRequest = false;
-          this.errorMsg = err.message;
-        });
+        },
+        logout() {
+            fb.auth.signOut()
+                .then(() => {
+                    console.log('signout')
+                })
+                .catch((error) => {
+                    console.log('[logout] errror :' + JSON.stringify(error))
+                })
+        },
+        resetPassword() {
+            //this.performingRequest = true;
+            fb.auth
+                .sendPasswordResetEmail(this.passwordForm.email)
+                .then(() => {
+                    //this.performingRequest = false;
+                    this.passwordResetSuccess = true;
+                    this.passwordForm.email = "";
+                })
+                .catch(err => {
+                    console.log(err);
+                    //this.performingRequest = false;
+                    this.errorMsg = err.message;
+                });
+        }
     }
-  }
 };
 </script>
 <style scoped>
 body {
-  margin: 0;
-  color: #34495e;
-  background: #e6ecf0;
+    margin: 0;
+    color: #34495e;
+    background: #e6ecf0;
 }
+
 html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
 }
+
 * {
-  font-family: "Roboto", sans-serif;
-  box-sizing: border-box;
-  transition: 0.15s;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    transition: 0.15s;
 }
+
 *:focus {
-  outline: none;
+    outline: none;
 }
+
 h1,
 h2,
 h3,
 h4,
 h5,
 p {
-  margin: 0 0 0.5rem;
+    margin: 0 0 0.5rem;
 }
+
 h1 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
+
 h2 {
-  font-size: 1.8rem;
+    font-size: 1.8rem;
 }
+
 h3 {
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }
+
 h4 {
-  font-size: 1.4rem;
+    font-size: 1.4rem;
 }
+
 h5 {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
+
 p {
-  line-height: 1.5;
+    line-height: 1.5;
 }
+
 a {
-  font-family: "Roboto", sans-serif;
-  text-decoration: none;
-  color: #5071b6;
-  margin: 0;
-  cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    text-decoration: none;
+    color: #5071b6;
+    margin: 0;
+    cursor: pointer;
 }
+
 a:hover {
-  color: #6280be;
+    color: #6280be;
 }
+
 section {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
 @media screen and (max-width: 742px) {
-  section {
-    display: block;
-  }
+    section {
+        display: block;
+    }
 }
+
 .col1,
 .col2 {
-  flex-grow: 1;
-  flex-basis: 0;
-  padding: 1rem;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 1rem;
 }
+
 [v-cloak] {
-  display: none;
+    display: none;
 }
+
 .error-msg {
-  margin-top: 2rem;
-  text-align: left;
-  font-size: 15px;
-  padding-left: 68px;
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 15px;
+    padding-left: 68px;
 }
+
 .error-msg p {
-  color: #d32f2f;
-  margin: 0;
+    color: #d32f2f;
+    margin: 0;
 }
+
 .button {
-  background: #5071b6;
-  border: 0;
-  outline: 0;
-  color: #fff;
-  padding: 0.8rem 1rem;
-  min-width: 150px;
-  font-size: 16px;
-  border-radius: 3px;
-  cursor: pointer;
+    background: #5071b6;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    min-width: 150px;
+    font-size: 16px;
+    border-radius: 3px;
+    cursor: pointer;
 }
+
 .button:hover {
-  background: #6280be;
+    background: #6280be;
 }
+
 .button:disabled {
-  opacity: 0.5;
+    opacity: 0.5;
 }
+
 .button:disabled:hover {
-  background: #5071b6;
+    background: #5071b6;
 }
+
 .text-center {
-  text-align: center;
+    text-align: center;
 }
+
 .inline {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 .inline li {
-  display: inline-block;
+    display: inline-block;
 }
+
 .clear {
-  clear: both;
+    clear: both;
 }
+
 form label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 0.5rem;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
 }
+
 form input {
-  display: block;
-  width: 100%;
-  margin-bottom: 1rem;
-  font-size: 16px;
-  padding: 10px;
-  outline: 0;
-  border: 1px solid #e6ecf0;
-  border-radius: 3px;
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #e6ecf0;
+    border-radius: 3px;
 }
+
 form input:focus {
-  box-shadow: 0 0 5px 0 rgba(52, 73, 94, 0.2);
+    box-shadow: 0 0 5px 0 rgba(52, 73, 94, 0.2);
 }
+
 form textarea {
-  resize: none;
-  border: 1px solid #e6ecf0;
-  outline: 0;
-  height: 100px;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
+    resize: none;
+    border: 1px solid #e6ecf0;
+    outline: 0;
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
 }
+
 .fade-enter-active {
-  transition: opacity 0.5s;
+    transition: opacity 0.5s;
 }
+
 .fade-leave-active {
-  transition: opacity 0s;
+    transition: opacity 0s;
 }
+
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 #login {
-  background: linear-gradient(
-    to right,
-    #5071b6 0%,
-    #5071b6 50%,
-    #fff 50%,
-    #fff 100%
-  );
+    background: linear-gradient(to right,
+            #5071b6 0%,
+            #5071b6 50%,
+            #fff 50%,
+            #fff 100%);
 }
+
 @media screen and (max-width: 742px) {
-  #login {
-    height: 100vh;
-    background: #fff;
-  }
+    #login {
+        height: 100vh;
+        background: #fff;
+    }
 }
+
 #login .col1,
 #login .col2 {
-  height: 100vh;
-  padding-top: 30vh;
+    height: 100vh;
+    padding-top: 30vh;
 }
+
 @media screen and (max-width: 742px) {
-  #login .col1,
-  #login .col2 {
-    height: auto;
-    padding-top: 20vh;
-  }
+
+    #login .col1,
+    #login .col2 {
+        height: auto;
+        padding-top: 20vh;
+    }
 }
+
 #login .col1 {
-  color: #fff;
+    color: #fff;
 }
+
 @media screen and (max-width: 742px) {
-  #login .col1 {
-    display: none;
-  }
+    #login .col1 {
+        display: none;
+    }
 }
+
 #login .col1 p {
-  max-width: 490px;
-  margin-top: 2rem;
-  line-height: 1.8;
+    max-width: 490px;
+    margin-top: 2rem;
+    line-height: 1.8;
 }
+
 #login .col1 a {
-  color: #fff;
-  text-decoration: underline;
+    color: #fff;
+    text-decoration: underline;
 }
+
 #login .signup-form {
-  padding-top: 20vh;
+    padding-top: 20vh;
 }
+
 @media screen and (max-width: 742px) {
-  #login .signup-form {
-    padding-top: 10vh;
-  }
+    #login .signup-form {
+        padding-top: 10vh;
+    }
 }
+
 #login .col2 h1 {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
+
 #login .col2 form {
-  max-width: 450px;
-  margin: 0 auto;
+    max-width: 450px;
+    margin: 0 auto;
 }
+
 #login .col2 .extras {
-  float: right;
-  text-align: right;
+    float: right;
+    text-align: right;
 }
+
 #login .col2 .extras a {
-  display: block;
-  margin-bottom: 0.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
 }
+
 #login .col2 .password-reset h1 {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
+
 #login .col2 .password-reset p {
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
+
 .mainteneo-tagline {
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  color: rgb(255, 255, 255);
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 32px;
-  text-align: right;
-  text-rendering: optimizelegibility;
-  transition-delay: 0s;
-  transition-duration: 0.15s;
-  transition-property: all;
-  transition-timing-function: ease;
-  -moz-osx-font-smoothing: grayscale;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 32px;
+    text-align: right;
+    text-rendering: optimizelegibility;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+    transition-property: all;
+    transition-timing-function: ease;
+    -moz-osx-font-smoothing: grayscale;
 }
 </style>

@@ -46,7 +46,7 @@ export default {
 }
 
 .selected {
-  background-color: blue;
-  cursor: pointer;
+  /* background-color: blue;
+  cursor: pointer; */
 }
 </style>

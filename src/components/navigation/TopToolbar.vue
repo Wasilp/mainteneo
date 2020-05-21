@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="#5071b6" dark app fixed>
+    <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" :color="bannerColor" dark app fixed>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-0">
         <router-link to="/dashboard">
           <a>
@@ -15,7 +15,7 @@
       <v-toolbar-side-icon @click.stop="switchNavigationDrawer"></v-toolbar-side-icon>
       <!-- <v-text-field flat solo-inverted hide-details prepend-inner-icon="search" label="Search" class="hidden-sm-and-down"></v-text-field> -->
       <v-spacer></v-spacer>
-      <!-- Notifications dropdown 
+      <!-- Notifications dropdown
     <v-menu offset-y origin="center center" class="elelvation-1" :nudge-bottom="14" transition="scale-transition">
         <v-btn icon flat slot="activator">
         <v-badge color="red" overlap>
@@ -101,7 +101,8 @@ export default {
   },
   data() {
     return {
-      aboutUsDialog: false
+      aboutUsDialog: false,
+      bannerColor:'#5071b6'
     };
   },
   methods: {
@@ -129,7 +130,15 @@ export default {
     setLocale(l) {
       this.$i18n.locale = l;
     }
-  }
+},
+
+mounted: function(){
+    if (webpackHotUpdate) {
+         console.log('In Dev Mode');
+         this.bannerColor = 'red'
+    }
+
+}
 };
 </script>
 <style scoped>
@@ -159,5 +168,3 @@ a.contact:active {
   font-weight: normal;
 }
 </style>
-
-

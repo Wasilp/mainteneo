@@ -14,6 +14,10 @@ import Snotify from 'vue-snotify';
 import 'vue-snotify/styles/material.css'; // or dark.css or simple.css
 import filters from './utils/Filters.js';
 import utils from './utils/Utils.js';
+import VuePhoneNumberInput from 'vue-phone-number-input';
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
+
+
 
 import NavigationDrawer from '@/components/navigation/NavigationDrawer.vue';
 import TopToolbar from '@/components/navigation/TopToolbar.vue';
@@ -27,9 +31,11 @@ Vue.use(Vuetify, {
     accent: '#0097A7'
   }
 });
+Vue.component('vue-phone-number-input', VuePhoneNumberInput);
 Vue.use(Snotify);
 
 Vue.use(Vuelidate);
+
 
 Vue.component('NavigationDrawer', NavigationDrawer);
 Vue.component('TopToolbar', TopToolbar);

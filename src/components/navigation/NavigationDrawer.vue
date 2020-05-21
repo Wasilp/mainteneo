@@ -19,7 +19,7 @@
               <v-list-tile-title style="text-transform:uppercase;">{{ item.text }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile v-for="(child, i) in item.children":key="i" :to='child.link'style="background-color:#F5F5F5">
+          <v-list-tile v-for="(child, i) in item.children":key="i" :to='child.link' style="background-color:#F5F5F5">
             <v-list-tile-content>
               <v-list-tile-title style="margin-left:20px">{{ child.text }}</v-list-tile-title>
             </v-list-tile-content>
@@ -28,7 +28,7 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list-group>
-        <v-list-tile v-else :key="item.text" @click="navigateTo(item.link)">
+        <v-list-tile v-else :key="item.text" :to="item.link">
           <v-list-tile-action>
             <v-icon style="color:#5071b6!important;">{{ item.icon }}</v-icon>
           </v-list-tile-action>
