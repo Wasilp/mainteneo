@@ -12,11 +12,11 @@
             <template slot="items" slot-scope="props">
                 <tr @click.stop="navigateTo('/customer/' + props.item.id)" :style="{ cursor: 'pointer'}">
                     <td nowrap>{{ props.item.name }}</td>
-                    <td>{{ props.item.email}}</td>
-                    <td>{{ props.item.mainAddress ? props.item.mainZipCode : ''}}</td>
-                    <td>{{ props.item.mainAddress ? props.item.mainCity : ''}}</td>
-                    <td>{{ props.item.mainAddress ? props.item.mainCountry :' '}}</td>
-                    <td>{{ props.item.lastUpdate.toDate() | formatDate }}</td>
+                    <td>{{ props.item.phone}}</td>
+                    <td>{{  props.item.zipcode}}</td>
+                    <td>{{  props.item.city}}</td>
+                    <td>{{  props.item.country}}</td>
+                    <td>{{ props.item.lastUpdated.toDate() | formatDate }}</td>
                     <td>
                         <v-btn flat icon color="#5071b6" @click.stop="navigateTo('/editCustomer/' + props.item.id)">
                             <v-icon size="20">edit</v-icon>
@@ -133,6 +133,8 @@ export default {
                     customersArray.push(customer);
                 });
                 this.customersItems = customersArray;
+
+                console.log(customersArray)
             })
             .catch(function(error) {
                 console.log("Error getting documents: ", error);

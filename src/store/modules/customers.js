@@ -75,7 +75,7 @@ export const actions = {
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomersCollecRef = refrigCompRef.collection('customers');
     //Base Query
-    let query = refrigCompCustomersCollecRef.where('compId', '==', compId);
+    let query = refrigCompCustomersCollecRef.where('refrigCompanyId', '==', compId);
     //Building query from payload.query: [[field, operator, value]]
     if (payload.query) {
       payload.query.forEach(element => {

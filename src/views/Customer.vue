@@ -29,9 +29,9 @@
                   {{customer.name}}
                 </v-flex>
                 <v-flex sm6></v-flex>
-                <v-flex sm6 v-if="customer.phoneNbrs">
+                <v-flex sm6 v-if="customer.phone">
                   <label>{{ $t('views.customer.phone') }}:</label>
-                  {{customer.phoneNbrs[0]}}
+                  {{customer.phone}}
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.customer.email') }}:</label>
@@ -47,7 +47,7 @@
                 </v-flex>
                 <v-flex sm6>
                   <label>{{ $t('views.customer.address') }}:</label>
-                  {{customer.mainAddress +' '+customer.mainZipCode+' '+customer.mainCity+' '+customer.mainCountry}}
+                  {{customer.street +' '+customer.zipcode+' '+customer.city+' '+customer.country}}
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -124,7 +124,7 @@ export default {
           c.id = doc.id;
           this.customer = c;
 
-
+          console.log(this.customer)
         } else {
           console.log("No such document!");
         }
