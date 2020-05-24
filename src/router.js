@@ -121,7 +121,7 @@ const router = new Router({
       }
     },
     {
-      path: '/intervention/:installationId/:interventionNumber',
+      path: '/intervention/:installationId/:id',
       name: 'Intervention',
       component: loadView('Intervention'),
       meta: {

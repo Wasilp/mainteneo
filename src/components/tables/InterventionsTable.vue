@@ -10,7 +10,7 @@
     <v-card-text class="pa-0">
         <v-data-table :headers="headers" :search="search" :items="interventionItems" :rows-per-page-items="[10,25,50,{text:'All','value':-1}]" :pagination.sync="pagination" class="elevation-1" item-key="id">
             <template slot="items" slot-scope="props">
-                <tr @click.stop="navigateTo('/intervention/' + props.item.installationId + '/' + props.item.interventionNumber)" :style="{ cursor: 'pointer'}">
+                <tr @click.stop="navigateTo('/intervention/' + props.item.installationId + '/' + props.item.id)" :style="{ cursor: 'pointer'}">
                     <td class>{{ props.item.interventionNumber }}</td>
                     <td class>
                         <span v-if="props.item.interventionType=='startup'">{{ $t('dropdownMenus.interventionType.startup') }}</span>

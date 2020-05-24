@@ -24,8 +24,8 @@
                 </td>
                 <td class>{{ props.item.actionDate.toDate() | formatDate }}</td>
                 <td class nowrap>
-                    <div v-if="props.item.actionType == 2">
-                        <div v-if="props.item.eventQuantity < 0" key="quantityPositive">
+                    <div v-if="props.item.gasFlowQuantity">
+                        <div v-if="props.item.gasFlowQuantity < 0" key="quantityPositive">
                             <v-icon color="green" small>arrow_upward</v-icon>
                             {{ Math.abs(props.item.gasFlowQuantity) }} kg {{ $t('dataTables.tanksEventTable.headers.injected') }}
                         </div>
@@ -36,16 +36,16 @@
                     </div>
                 </td>
                 <td class>
-                    <a @click.stop="navigateTo('/installation/' + props.item.installationId)">{{props.item.installationSn}}</a>
+                    <a @click.stop="navigateTo('/installation/' + props.item.installationId)">{{props.item.installationSN}}</a>
                 </td>
                 <td class>
-                    <span v-if="props.item.actionType == 1"></span>
+                    <!-- <span v-if="props.item.actionType == 1"></span>
                     <span v-else-if="props.item.actionType == 2"></span>
                     <span v-else-if="props.item.actionType == 3"></span>
-                    <span v-else-if="props.item.actionType == 4">
+                    <span v-else-if="props.item.actionType == 4"></span> -->
                         <a @click.stop="navigateTo('/customer/' + props.item.customerId)">{{props.item.customerSiteName}}</a>
-                    </span>
-                    <span v-else-if="props.item.actionType == 5">//TODO Supplier Name</span>
+
+                    <!-- <span v-else-if="props.item.actionType == 5">//TODO Supplier Name</span> -->
                 </td>
                 <td class>
                     <a @click.stop="navigateTo('/employee/' + props.item.actionById)">{{props.item.actionByName}}</a>

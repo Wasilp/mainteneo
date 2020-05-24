@@ -106,7 +106,7 @@ export const actions = {
             tankEvent.id = doc.id;
             tankEventsArray.push(tankEvent);
           });
-          console.log(tankEventsArray)
+          console.log(tankEventsArray ,'tankEVENTS ARRAYYYYAYYAYAYAA')
           resolve(tankEventsArray);
         })
         .catch(error => {

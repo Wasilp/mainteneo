@@ -10,7 +10,7 @@
               <span class="content-title">{{ $t('views.gasAccounting.gasAccountingByTank.title') }}</span>
             </v-flex>
             <v-flex xs12>
-              <tank-events-table :query="[['actionType', '==', 2]]"></tank-events-table>
+              <tank-events-table></tank-events-table>
             </v-flex>
           </v-layout>
         </v-container>
