@@ -15,28 +15,33 @@ export const actions = {
     const compId = rootState.userProfile.refrigCompanyId;
     const refrigCompRef = fb.db.collection('refrigCompanies').doc(compId);
     const refrigCompCustomerInstallationHistoryCollecRef = refrigCompRef.collection('interventions');
+
     //Base Query
     let query = refrigCompCustomerInstallationHistoryCollecRef.where('createdByrefrigCompanyId','==',compId);
     let groupByKey;
     //Building query from payload.query: [[field, operator, value]]
-    if (payload.query) {
-      payload.query.forEach(element => {
-        const field = element[0];
-        if (field == 'groupBy') {
-          groupByKey = element[1];
-        } else {
-          const operator = element[1];
-          const value = element[2];
-          query = query.where(field, operator, value);
-        }
-      });
-    }
+
+    // NEED TO FIX WHERE CONDITIONS
+
+    // if (payload.query) {
+    //   payload.query.forEach(element => {
+    //     const field = element[0];
+    //     if (field == 'groupBy') {
+    //       groupByKey = element[1];
+    //     } else {
+    //       const operator = element[1];
+    //       const value = element[2];
+    //       query = query.where(field, operator, value);
+    //     }
+    //   });
+    // }
     return new Promise((resolve, reject) => {
       query
         .get()
         .then(querySnapshot => {
           let customerInstallationHistoryArray = [];
           querySnapshot.forEach(doc => {
+
             let customerInstallationHistory = doc.data();
             customerInstallationHistory.id = doc.id;
             customerInstallationHistoryArray.push(customerInstallationHistory);
@@ -48,6 +53,7 @@ export const actions = {
           //   );
           //   resolve(arrayNew);
           // } else {
+
             resolve(customerInstallationHistoryArray);
           // }
         })

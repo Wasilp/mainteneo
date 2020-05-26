@@ -72,7 +72,7 @@
                         <v-icon class="tab-icon">assignment</v-icon>
                     </v-tab>
                     <v-tab-item id="tab-1" key="1">
-                        <customer-installation-events-table :query="[['interventionId','==', interventionItems[0].id]]"></customer-installation-events-table>
+                        <customer-installation-events-table :query="[['installationId','==', installation.id]]"></customer-installation-events-table>
                     </v-tab-item>
                     <v-tab-item id="tab-2" key="2">
                         <v-card>
@@ -93,7 +93,7 @@
 
 
                                                     <v-layout row wrap class="x-grid-lg">
-                                                        <a @click="openFile(item.url, item.id, item.accessCode)" class="d-flex">
+                                                        <a @click="openFile(item.fileName)" class="d-flex">
                                                             <v-card flat tile class="media-detail">
                                                                 <v-card-media height="150px" width="150px" style="margin:auto;">
                                                                     <v-icon class="mx-auto" size="120">{{ getFileIcon(item.fileExtension) }}</v-icon>
@@ -197,7 +197,7 @@ export default {
                 //TODO
                 console.log("Error: " + error);
             } else if (response) {
-                console.log(response, 'intervention datac')
+
                 this.interventionItems = response;
 
                 switch (this.interventionItems[0].interventionType) {
@@ -249,7 +249,7 @@ export default {
         async setInterventionFilesListener() {
 
             const interventionId = this.$route.params.id;
-            alert(interventionId)
+
             const compId = this.$store.state.userProfile.refrigCompanyId;
             const refrigCompRef = fb.db.collection("files")
 
@@ -288,21 +288,27 @@ export default {
                 this.loading = false;
             });
         },
-        openFile(url, id, code) {
+        openFile(fileName) {
 
-            let params = {
-                fileId: id,
-                accessCode: code
-            }
+            // let params = {
+            //     fileId: id,
+            //     accessCode: code
+            // }
+            //
+            // axios.get('https://us-central1-mainteneo-react-native-dev.cloudfunctions.net/api/v1/files/'+params.fileId+'/'+params.accessCode, {
+            // }).then(function(response){
+            //     console.log(response,'HELLO FROM AXIOS ')
+            // }).catch(function(error) {
+            //  console.log(error,'FATALERRRROORRR')
+            // });
 
-            axios.get('https://us-central1-mainteneo-react-native-dev.cloudfunctions.net/api/v1/files/'+params.fileId+'/'+params.accessCode, {
-            }).then(function(response){
-                console.log(response,'HELLO FROM AXIOS ')
-            }).catch(function(error) {
-             console.log(error,'FATALERRRROORRR')
-            });
+            const test = fb.storage;
 
-             // window.open(url);
+            const ref = fb.storage.refFromURL('gs://mainteneo-react-native-dev.appspot.com/' + fileName).getDownloadURL().then(function(url){
+                window.open(url)
+            })
+            // This can be downloaded directly:
+
         }
     },
     created: function() {
