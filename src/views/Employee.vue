@@ -1,86 +1,84 @@
 <template>
-  <v-app>
+<v-app>
     <navigation-drawer></navigation-drawer>
     <top-toolbar></top-toolbar>
     <v-content>
-      <div class="content">
-        <v-flex sm12 class="page-title">
-          <h3>{{ $t('views.employee.title') }}</h3>
-        </v-flex>
-        <v-card class="block-element">
-          <v-layout row wrap>
-            <v-flex lg6>
-              <v-layout row wrap>
-                <v-flex lg3>
-                  <span>
-                    <v-icon class="page-icon">directions_walk</v-icon>
-                  </span>
-                </v-flex>
-                <v-flex lg9>
-                  <h1 style="word-wrap:break-word;">{{ user.userName }}</h1>
-                </v-flex>
-              </v-layout>
+        <div class="content">
+            <v-flex sm12 class="page-title">
+                <h3>{{ $t('views.employee.title') }}</h3>
             </v-flex>
-            <v-flex lg6>
-              <v-layout row wrap>
-                <v-flex sm6>
-                  <label>{{ $t('views.employee.name') }}:</label>
-                  {{ user.userName }}
-                </v-flex>
-                <v-flex sm6>
-                  <label>{{ $t('views.employee.phone') }}:</label>
-                  {{ phoneNumber(user) }}
-                </v-flex>
-                <v-flex sm6>
-                  <label>{{ $t('views.employee.email') }}:</label>
-                  {{user.emailId}}
-                </v-flex>
-                <v-flex sm6>
-                  <label>{{ $t('views.employee.language') }}:</label>
-                  {{user.lng}}
-                </v-flex>
-                <!-- <v-flex sm6>
+            <v-card class="block-element">
+                <v-layout row wrap>
+                    <v-flex lg6>
+                        <v-layout row wrap>
+                            <v-flex lg3>
+                                <span>
+                                    <v-icon class="page-icon">directions_walk</v-icon>
+                                </span>
+                            </v-flex>
+                            <v-flex lg9>
+                                <h1 style="word-wrap:break-word;">{{ user.userName }}</h1>
+                            </v-flex>
+                        </v-layout>
+                    </v-flex>
+                    <v-flex lg6>
+                        <v-layout row wrap>
+                            <v-flex sm6>
+                                <label>{{ $t('views.employee.name') }}:</label>
+                                {{ user.userName }}
+                            </v-flex>
+                            <v-flex sm6>
+                                <label>{{ $t('views.employee.phone') }}:</label>
+                                {{ phoneNumber(user) }}
+                            </v-flex>
+                            <v-flex sm6>
+                                <label>{{ $t('views.employee.email') }}:</label>
+                                {{user.emailId}}
+                            </v-flex>
+                            <v-flex sm6>
+                                <label>{{ $t('views.employee.language') }}:</label>
+                                {{user.lng}}
+                            </v-flex>
+                            <!-- <v-flex sm6>
                                     <label>Timezone: </label>{{user.timezone}}
                 </v-flex>-->
-                <v-flex sm6>
-                  <label>{{ $t('views.employee.role') }}:</label>
-                 {{ $t('views.employeeType.'+ user.role) }}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-card>
-        <v-divider></v-divider>
-        <v-flex lg12 class="block-element">
-          <v-tabs fixed-tabs grow centered icons-and-text>
-            <v-tab href="#tab-1">
-              {{ $t('views.employee.interventions') }}
-              <v-icon class="tab-icon">library_books</v-icon>
-            </v-tab>
-            <v-tab href="#tab-2">
-              {{ $t('views.employee.inventory') }}
-              <v-icon class="tab-icon">battery_full</v-icon>
-            </v-tab>
-            <v-tab href="#tab-3">
-              {{ $t('views.employee.events') }}
-              <v-icon class="tab-icon">compare_arrows</v-icon>
-            </v-tab>
-            <v-tab-item value="tab-1" key="1">
-              <interventions-table
-                :query="[['groupBy','interventionNumber'], ['actionByUserId', '==', this.$route.params.id]]"
-              ></interventions-table>
-            </v-tab-item>
-            <v-tab-item value="tab-2" key="2">
-              <v-card>
-                <tanks-table :query="[['takenById','==', this.$route.params.id]]"></tanks-table>
-              </v-card>
-            </v-tab-item>
-            <v-tab-item value="tab-3" key="3">
-              <v-card>
-                <tank-events-table :query="[['actionById','==', this.$route.params.id]]"></tank-events-table>
-              </v-card>
-            </v-tab-item>
-            <!-- Statistic
+                            <v-flex sm6>
+                                <label>{{ $t('views.employee.role') }}:</label>
+                                {{ $t('views.employeeType.'+ user.role) }}
+                            </v-flex>
+                        </v-layout>
+                    </v-flex>
+                </v-layout>
+            </v-card>
+            <v-divider></v-divider>
+            <v-flex lg12 class="block-element">
+                <v-tabs fixed-tabs grow centered icons-and-text>
+                    <v-tab href="#tab-1">
+                        {{ $t('views.employee.interventions') }}
+                        <v-icon class="tab-icon">library_books</v-icon>
+                    </v-tab>
+                    <v-tab href="#tab-2">
+                        {{ $t('views.employee.inventory') }}
+                        <v-icon class="tab-icon">battery_full</v-icon>
+                    </v-tab>
+                    <v-tab href="#tab-3">
+                        {{ $t('views.employee.events') }}
+                        <v-icon class="tab-icon">compare_arrows</v-icon>
+                    </v-tab>
+                    <v-tab-item value="tab-1" key="1">
+                        <interventions-table :query="[['groupBy','interventionNumber'], ['actionByUserId', '==', this.$route.params.id]]"></interventions-table>
+                    </v-tab-item>
+                    <v-tab-item value="tab-2" key="2">
+                        <v-card>
+                            <tanks-table :query="[['takenById','==', this.$route.params.id]]"></tanks-table>
+                        </v-card>
+                    </v-tab-item>
+                    <v-tab-item value="tab-3" key="3">
+                        <v-card>
+                            <tank-events-table :query="[['actionById','==', this.$route.params.id]]"></tank-events-table>
+                        </v-card>
+                    </v-tab-item>
+                    <!-- Statistic
                         <v-tab-item id="tab-3" key="3">
                             <v-layout row wrap>
                                 mini statistic start
@@ -161,11 +159,11 @@
                             <v-spacer></v-spacer>
                         </v-tab-item>
             END Statistic-->
-          </v-tabs>
-        </v-flex>
-      </div>
+                </v-tabs>
+            </v-flex>
+        </div>
     </v-content>
-  </v-app>
+</v-app>
 </template>
 <script>
 import TanksTable from "@/components/tables/TanksTable";
@@ -176,56 +174,57 @@ import Material from "vuetify/es5/util/colors";
 import MiniStatistic from "@/components/widgets/statistic/MiniStatistic";
 import VWidget from "@/components/VWidget";
 import VCircle from "@/components/circle/VCircle";
-import { mapState } from "vuex";
+import {
+    mapState
+} from "vuex";
 const fb = require("../firebaseConfig.js");
 export default {
-  name: "employee",
-  components: {
-    MiniStatistic,
-    VWidget,
-    VCircle,
-    "tanks-table": TanksTable,
-    "interventions-table": InterventionsTable,
-    "tank-events-table": TankEventsTable
-  },
-  data() {
-    return {
-      user: {},
-      color: Material
-    };
-  },
-  methods: {
-    navigateTo(target) {
-      this.$router.push(target);
+    name: "employee",
+    components: {
+        MiniStatistic,
+        VWidget,
+        VCircle,
+        "tanks-table": TanksTable,
+        "interventions-table": InterventionsTable,
+        "tank-events-table": TankEventsTable
     },
-    userDataCallback(response, error) {
-      if (error) {
-        //TODO
-        console.log("Error: " + error);
-      } else {
-        this.user = response;
-        alert('coucou')
-        console.log(this.user,'employee')
-      }
+    data() {
+        return {
+            user: {},
+            color: Material
+        };
     },
-    phoneNumber: function(employee) {
-      if (employee.phone && employee.phone.length > 0) {
-        return employee.phone;
-      } else {
-        return "";
-      }
-    }
-  },
-  computed: {},
-  created: function() {
-    const payload = {};
-    if (this.$route.params.id) {
+    methods: {
+        navigateTo(target) {
+            this.$router.push(target);
+        },
+        userDataCallback(response, error) {
+            if (error) {
+                //TODO
+                console.log("Error: " + error);
+            } else {
+                this.user = response;
 
-    alert(this.$route.params.id)
-      payload.userId = this.$route.params.id;
+                console.log(this.user, 'employee')
+            }
+        },
+        phoneNumber: function(employee) {
+            if (employee.phone && employee.phone.length > 0) {
+                return employee.phone;
+            } else {
+                return "";
+            }
+        }
+    },
+    computed: {},
+    created: function() {
+        const payload = {};
+        if (this.$route.params.id) {
+
+            payload.userId = this.$route.params.id;
+        }
+        this.$store.dispatch("fetchUser", payload).then(this.userDataCallback);
     }
-    this.$store.dispatch("fetchUser", payload).then(this.userDataCallback);
-  }
 };
 </script>
 <style>

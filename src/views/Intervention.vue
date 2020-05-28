@@ -289,26 +289,9 @@ export default {
             });
         },
         openFile(fileName) {
-
-            // let params = {
-            //     fileId: id,
-            //     accessCode: code
-            // }
-            //
-            // axios.get('https://us-central1-mainteneo-react-native-dev.cloudfunctions.net/api/v1/files/'+params.fileId+'/'+params.accessCode, {
-            // }).then(function(response){
-            //     console.log(response,'HELLO FROM AXIOS ')
-            // }).catch(function(error) {
-            //  console.log(error,'FATALERRRROORRR')
-            // });
-
-            const test = fb.storage;
-
             const ref = fb.storage.refFromURL('gs://mainteneo-react-native-dev.appspot.com/' + fileName).getDownloadURL().then(function(url){
                 window.open(url)
             })
-            // This can be downloaded directly:
-
         }
     },
     created: function() {
