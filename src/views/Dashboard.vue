@@ -3,9 +3,9 @@
     <navigation-drawer></navigation-drawer>
     <top-toolbar></top-toolbar>
     <v-content>
-        <div v-show="showSpinner" class="text-xs-center spinner-div">
+        <!-- <div v-show="showSpinner" class="text-xs-center spinner-div">
             <v-progress-circular :size="70" :width="7" color="secondary" indeterminate></v-progress-circular>
-        </div>
+        </div> -->
         <div v-show="showInitialMessage" class="text-xs-center spinner-div">
             <span class="headline" v-html="$t('views.dashboard.noTanks')"></span>
         </div>
@@ -244,9 +244,9 @@ export default {
         };
     },
     computed: {
-        showSpinner() {
-            return !this.tanksInitiallyFetched;
-        },
+        // showSpinner() {
+        //     return !this.tanksInitiallyFetched;
+        // },
         showDashboard() {
             return this.tanksItems.length > 0 && this.tanksInitiallyFetched;
         },
@@ -263,7 +263,7 @@ export default {
             //TODO: error mngmt
             console.log("Error: " + error);
           } else if (response) {
-            this.tanksItems = response;
+            // this.tanksItems = response;
 
             console.log(response)
             this.inventoryByGas = UTIL.groupBy(this.tanksItems, "gas");
@@ -397,7 +397,7 @@ export default {
                             tank.id = doc.id;
                             tanksArray.push(tank);
                         });
-                        this.tanksItems = tanksArray;
+                        // this.tanksItems = tanksArray;
                         this.populateViewComponents();
                     },
                     error => {
