@@ -23,18 +23,18 @@ export const actions = {
 
     // NEED TO FIX WHERE CONDITIONS
 
-    // if (payload.query) {
-    //   payload.query.forEach(element => {
-    //     const field = element[0];
-    //     if (field == 'groupBy') {
-    //       groupByKey = element[1];
-    //     } else {
-    //       const operator = element[1];
-    //       const value = element[2];
-    //       query = query.where(field, operator, value);
-    //     }
-    //   });
-    // }
+    if (payload.query) {
+      payload.query.forEach(element => {
+        const field = element[0];
+        if (field == 'groupBy') {
+          groupByKey = element[1];
+        } else {
+          const operator = element[1];
+          const value = element[2];
+          query = query.where(field, operator, value);
+        }
+      });
+    }
     return new Promise((resolve, reject) => {
       query
         .get()

@@ -19,7 +19,7 @@
 
                 <v-form class="mb-4">
 
-                <VuePhoneNumberInput v-model="loginForm.phoneNumber"  @update="countryChanged" prepend-icon="phone"  name="login" :label="this.$i18n.t('views.login.login')" placeholder="+32478096723" type="text" color="#5071b6" />
+                    <VuePhoneNumberInput v-model="loginForm.phoneNumber" @update="countryChanged" prepend-icon="phone" name="login" :label="this.$i18n.t('views.login.login')" placeholder="+32478096723" type="text" color="#5071b6" />
 
                 </v-form>
                 <v-btn @click="LogNum" round large dark color="#00acc1">LogIn</v-btn>
@@ -106,14 +106,14 @@ const Users = require('../store/modules/users.js')
 export default {
     components: {
         VuePhoneNumberInput,
-      },
+    },
     data() {
         return {
 
-            loginForm:{
-                code:'',
-                phoneNumber:'',
-                countryCode:''
+            loginForm: {
+                code: '',
+                phoneNumber: '',
+                countryCode: ''
             },
             signupForm: {
                 name: "",
@@ -135,6 +135,8 @@ export default {
         };
     },
     methods: {
+
+
         toggleForm() {
             this.errorMsg = "";
             this.showLoginForm = !this.showLoginForm;
@@ -151,17 +153,16 @@ export default {
             }
         },
         // FUNCTION To save and split the phone number
-        countryChanged(phoneMeta){
+        countryChanged(phoneMeta) {
 
-        console.log(phoneMeta.countryCallingCode)
+            console.log(phoneMeta.countryCallingCode)
             this.loginForm.countryCode = phoneMeta.countryCallingCode
         },
         LogNum() {
             this.showCodeForm = true
             this.showLoginForm = false
-        },
-        // Function who's calling authRequest in the store to connect with custom Token created from API
-        login() {
+            console.log(this.loginForm.phoneNumber, 'KIKOU')
+
             Users.actions.authRequest(this.loginForm).then((response) => {
                     console.log('[auth request] ' + JSON.stringify(response));
                     if (response.status === 'success') {
@@ -169,61 +170,60 @@ export default {
                         console.log(response);
                         console.log('-------')
                         console.log(response)
-
-                        var authWithCode = fb.functions.httpsCallable('authWithCode');
-
-                        console.log(this.loginForm.phoneNumber,'KIKOU')
-                        // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
-                        const data = {
-                            countryCode: this.loginForm.countryCode,
-                            phoneNumber: this.loginForm.phoneNumber,
-                            verificationCode: this.loginForm.code
-                        }
-
-
-                        authWithCode(data).then((response) => {
-                            fb.auth.signInWithCustomToken(response.data.customToken).then((response) => {
-                                var currentUser = fb.auth.currentUser;
-                                console.log(JSON.stringify(currentUser));
-                                this.$store.commit("SET_CURRENT_USER", currentUser);
-                                this.$store.dispatch("fetchUserProfile");
-                                this.$router.push("/dashboard");
-                            })
-                        })
-                    } else if (response.status === 'error') {
-                        this.errorMsg = response.message;
                     }
-                })
-                .catch((error) => {
-                    console.log('[error] ' + error)
-                })
+                 else if (response.status === 'error') {
+                    this.errorMsg = response.message;
+                }
+            })
+        },
+        // Function who's calling authRequest in the store to connect with custom Token created from API
+        login() {
+            var authWithCode = fb.functions.httpsCallable('authWithCode');
 
-        },
-        logout() {
-            fb.auth.signOut()
-                .then(() => {
-                    console.log('signout')
+            console.log(this.loginForm.phoneNumber, 'KIKOU')
+            // var authWithCodeRequestFunction = fb.functions.httpsCallable('authWithCode');
+            const data = {
+                countryCode: this.loginForm.countryCode,
+                phoneNumber: this.loginForm.phoneNumber,
+                verificationCode: this.loginForm.code
+            }
+
+
+            authWithCode(data).then((response) => {
+                fb.auth.signInWithCustomToken(response.data.customToken).then((response) => {
+                    var currentUser = fb.auth.currentUser;
+                    console.log(JSON.stringify(currentUser));
+                    this.$store.commit("SET_CURRENT_USER", currentUser);
+                    this.$store.dispatch("fetchUserProfile");
+                    this.$router.push("/dashboard");
                 })
-                .catch((error) => {
-                    console.log('[logout] errror :' + JSON.stringify(error))
-                })
-        },
-        resetPassword() {
-            //this.performingRequest = true;
-            fb.auth
-                .sendPasswordResetEmail(this.passwordForm.email)
-                .then(() => {
-                    //this.performingRequest = false;
-                    this.passwordResetSuccess = true;
-                    this.passwordForm.email = "";
-                })
-                .catch(err => {
-                    console.log(err);
-                    //this.performingRequest = false;
-                    this.errorMsg = err.message;
-                });
-        }
+            })
+    },
+    logout() {
+        fb.auth.signOut()
+            .then(() => {
+                console.log('signout')
+            })
+            .catch((error) => {
+                console.log('[logout] errror :' + JSON.stringify(error))
+            })
+    },
+    resetPassword() {
+        //this.performingRequest = true;
+        fb.auth
+            .sendPasswordResetEmail(this.passwordForm.email)
+            .then(() => {
+                //this.performingRequest = false;
+                this.passwordResetSuccess = true;
+                this.passwordForm.email = "";
+            })
+            .catch(err => {
+                console.log(err);
+                //this.performingRequest = false;
+                this.errorMsg = err.message;
+            });
     }
+}
 };
 </script>
 <style scoped>

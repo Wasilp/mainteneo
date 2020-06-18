@@ -133,6 +133,8 @@ export default {
         const payload = {};
         if (this.query) {
             payload.query = this.query;
+
+            alert(payload.query)
         }
         this.$store
             .dispatch("fetchTankEvents", payload)

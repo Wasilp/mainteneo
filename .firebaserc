@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "mainteneo-react-native-dev"
+    "default": "mainteneo-react-native-dev",
+    "prod": "mainteneo-prod"
   }
 }

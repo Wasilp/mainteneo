@@ -263,7 +263,7 @@ export default {
             //TODO: error mngmt
             console.log("Error: " + error);
           } else if (response) {
-            // this.tanksItems = response;
+              this.tanksItems = response;
 
             console.log(response)
             this.inventoryByGas = UTIL.groupBy(this.tanksItems, "gas");
@@ -397,7 +397,7 @@ export default {
                             tank.id = doc.id;
                             tanksArray.push(tank);
                         });
-                        // this.tanksItems = tanksArray;
+                        this.tanksItems = tanksArray;
                         this.populateViewComponents();
                     },
                     error => {

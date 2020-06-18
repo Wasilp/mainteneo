@@ -300,15 +300,17 @@ export default {
 
         if (
             this.$route.params.installationId &&
-            this.$route.params.id
+            this.$route.params.interventionNumber
         ) {
             installationPayload.installationId = this.$route.params.installationId;
             interventionPayload.query = [
-                ["id", "==", this.$route.params.id]
+                ["interventionNumber", "==", this.$route.params.interventionNumber]
             ];
         } else {
             navigateTo("404");
         }
+
+
         this.$store
             .dispatch("fetchInstallation", installationPayload)
             .then(this.installationDataCallback);
